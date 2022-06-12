@@ -11,9 +11,9 @@ body{
 	text-align: center;
 }
 .main{	
-	background-color: white;
-	width: 90%;
+	width: 80%;
 	display:inline-block;
+	background-color: white;
 
 }
 
@@ -47,7 +47,7 @@ body{
 }
 
 .main2 img{
-	width: 80%;
+ width: 50%;
 }
 
 .frase{
@@ -67,6 +67,10 @@ body{
 	width: 50%;
 }
 
+.camisas img, .uniformes img, .sweater img, .accesorios img, .conjuntos img, .shorts img{
+	
+}
+
 .titulo{
 	text-align: left;
 	padding: 20px; 
@@ -74,8 +78,13 @@ body{
 
 .destacados{
 	display: inline-block;
-	width: 60%;
+	width: 100%;
+	height: 600px;
 	text-align: center;
+}
+
+.destacados img{
+	
 }
 
 .destacados> .titulo{
@@ -90,6 +99,7 @@ body{
 .slider{
 	position: absolute;
 	opacity: 0;
+	width: 100%;
 }
 
 .slider:first-child{
