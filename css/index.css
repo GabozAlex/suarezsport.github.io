@@ -1,155 +1,225 @@
 *{
 	padding: 0px;
 	margin: 0px;
-}
-
-body{
-	min-width: 1024px;
-	max-width: 1440px;
 	font-family: monospace;
-	background-color: black;
-	text-align: center;
-}
-.main{	
-	width: 80%;
-	display:inline-block;
-	background-color: white;
-
 }
 
-.presentacion{
+main{
 	width: 100%;
+	height: 100%;
+}
+
+header {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	background-color: gray; 
-}
-
-.foto-presentacion{
-	width:30%;
-	text-align: center;
-	padding: 10px;
-}
-
-.foto-presentacion img{
-	width: 25%;
-}
-
-.logo{
-	width:70%;
-	text-align: center;
-	padding: 10px;
-}	
-
-.logo img{
-	width: 35%;
+	background-color: transparent;
+	width: 100%;
+	min-height: 50px;
+	position: absolute;
 	color: white;
 }
-
-.main2 img{
- width: 50%;
+header img{
+	width: 50px;
+	height: 50px;
+	padding: 5px;
 }
-
-.frase{
-	text-align: center;
-	margin: 40px;
-	padding: 25px;
-	border: 0.5px solid black;
+header h1 {
+	font-size: 2em;
+	line-height: 50px;
+	width: 90%;
+	margin-left:20px;
 }
-
-.tendencias{
-	width: 100%;
-	height: 100%;
-	display: flex;
-	flex-direction: row;
-	justify-content: space-around;
-	align-items: center;
-	padding-top: 30px;
-	padding-bottom: 30px;
+header:hover {
+	background-color: rgba(190, 190, 190, 0.7); 
 }
-
-.destacados{
-	width: 100%;
+.hero {
+	background-image: url('../imagenes/presentacion/hero2.jpg');
+	background-size: cover;
+	background-position: top;
+	color: white;
+	min-height: 800px;
+	text-align: left;
 	display: flex;
 	flex-direction: column;
-	justify-content: space-around;
-	align-items: center;
-}
-
-.slide{
-	width: 40%;
-	height: 500px;
-	overflow: hidden;
-	border-radius: 20px;
-}
-
-.slider{
-	background-color: white;
-	position: relative;
-	text-align: center;
-	height: 100%;
+	justify-content: center;
+	align-items: left;
 	width: 100%;
 }
 
-.foto{
-	width: 100%;
-	height: 100%;
-}
-
-.foto img{
-	width: 100%;
-	height: 100%;
-}
-
-.flechas{
-	height: 100%;
-	width: 100%;
-	position: absolute;
-	top: 0;
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	padding: 10px;
-}
-
-.flechas img{
-	width: 25%;
-	background-color: white;
-	opacity: 0.5;
-	padding: 5px;
-	border-radius: 50px;
-}
-
-.flechas img:hover{
-	background-color: gray;
-}
-
-.columna{
-	border: 1px solid white;
-	background-color: gray;
-	display: flex;
-	flex-wrap: row;
-	justify-content: space-around;
-	color: white;
-	font-size: 10px; 	 
-}
-
-.columna img{
-	width: 10%;
-	padding: 10px;
-}
-
-.caja{
-	text-align: center;
-}
-
-.caja h2{
-	padding: 20px;
+.hero h2{
+	font-size: 3em;
 	text-align: left;
+	margin-bottom: 20px;
+	font-style: bold;
+	padding-left: 15px;
 }
 
-.redes:hover{
-	opacity: 0.50;
+.hero p {
+	display: block;
+	font-size: 2em;
+	margin-bottom: 30px;
+	width: 70%;
+	padding-left: 15px;
+	text-align: justify;
+}
+
+.features {
+	flex: flex;;
+	justify-content: center;
+	align-items: center;
+	background-color: #111111;
+	color: white;
+	width: 100%;
+	min-height: 1000px;
+	padding-bottom: 50px;
+	padding-top: 50px;
+}
+
+.features>h2{
+	font-size: 2em;
+	margin-bottom: 20px;
+	text-align: center;	
+}
+
+.features>p{
+	font-size: 1.2em;
+	text-align: center;
+}
+
+.features .list-cards {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+}
+
+.card{
+	width: 400px;
+	height: 300px;
+	padding: 50px;
+}
+.card h4{
+	font-size: 1.5em;
+	margin-bottom: 5px;
+}
+
+.card p{
+	font-size: 1.2em;
+	margin-top: 10px;
+	text-align: justify;
+}
+
+.card img{
+	border-radius: 30px;
+	width: 100px;
+	height: 200px;
+	width: 100%;
+	height: 80%;
+	
+}
+
+.actions h2{
+	padding: 10px;
+	font-size: 2em;
+}
+
+.actions p{
+	width: 80%;
+	font-size: 1.5em;
+}
+
+.actions{
+	background-image: url('../imagenes/presentacion/presentacion3.jpg');
+	background-size: cover;
+	background-position: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	min-height: 800px;
+	color: white;
+	position: relative;
+}
+
+
+.contact{
+	background-color: rgba(17, 17, 17, 0.9);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	min-height: 100px;
+	padding: 20px;
+	color: white;
+}
+
+.contact h2{
+	font-size: 2em;
+	margin-bottom: 20px;
+}
+
+.contact ul{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.contact ul li{
+	list-style: none;
+	padding: 10px;
+}
+.contact ul li a img{
+	width: 50px;
+	height: 50px;
+}
+.contact ul li a img:hover{
+	width: 60px;
+	height: 60px;
+	transition: 0.3s;
+}
+
+footer{
+	background-color: #111111;
+	min-height: 200px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: white;
+	position: relative;
+}
+
+footer nav ul {
+	text-align: center;
+}
+
+footer nav ul li{
+	display: inline-block;
+	text-align: center;
+	padding: 10px;
+	background-color: transparent;
+}
+footer nav ul li a{
+	list-style: none;
+	text-decoration: none;
+	color: white;
+	font-size: 1.5em;
+}
+
+footer nav ul li a:hover{
+	font-size: 2em;
+	background-color: gray;
+	border-radius: 10px;
+	transition: 0.4s;
+	padding: 5px;
+}
+footer nav ul p a{
+	text-decoration: none;
+	color: white;
+}
+footer nav ul p a:hover{
+	font-size: 1.2em;
+	transition: 0.4s;
 }
 
 

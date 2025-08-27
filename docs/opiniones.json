@@ -1,0 +1,124 @@
+{
+  "testimonios": [
+    {
+      "id": 1,
+      "nombre": "Zoe Harris",
+      "edad": 28,
+      "ciudad": "Madrid",
+      "producto": "Equipo de fútbol personalizado",
+      "opinion": "Gracias a Suarez Sport, pude personalizar mi equipo deportivo con facilidad y el resultado fue espectacular. La calidad de la ropa es insuperable.",
+      "valoracion": 5,
+      "fecha": "2024-03-15"
+    },
+    {
+      "id": 2,
+      "nombre": "Ava Green",
+      "edad": 32,
+      "ciudad": "Barcelona",
+      "producto": "Ropa deportiva personalizada",
+      "opinion": "Suarez Sport me permitió personalizar mi ropa deportiva de manera sencilla y rápida. Los materiales son de excelente calidad, y el servicio al cliente fue excepcional. Definitivamente volveré a comprar.",
+      "valoracion": 5,
+      "fecha": "2024-02-28"
+    },
+    {
+      "id": 3,
+      "nombre": "Carlos Rodríguez",
+      "edad": 25,
+      "ciudad": "Valencia",
+      "producto": "Uniforme de baloncesto",
+      "opinion": "Increíble experiencia con Suarez Sport. El proceso de personalización fue intuitivo y el producto final superó todas mis expectativas. La entrega fue puntual y la calidad premium.",
+      "valoracion": 5,
+      "fecha": "2024-03-10"
+    },
+    {
+      "id": 4,
+      "nombre": "Maya Patel",
+      "edad": 29,
+      "ciudad": "Sevilla",
+      "producto": "Uniforme deportivo",
+      "opinion": "¡Quedé encantada! Diseñar mi uniforme deportivo fue muy divertido y fácil en su plataforma. La tela es muy cómoda y transpirable, perfecta para el alto rendimiento. ¡Recomendado 100%!",
+      "valoracion": 5,
+      "fecha": "2024-03-05"
+    },
+    {
+      "id": 5,
+      "nombre": "Liam Johnson",
+      "edad": 35,
+      "ciudad": "Bilbao",
+      "producto": "Chamarra personalizada",
+      "opinion": "Suarez Sport es mi nueva tienda favorita. El servicio al cliente resolvió todas mis dudas rápidamente. La chamarra personalizada que encargué es de la mejor calidad que he visto. Un acierto total.",
+      "valoracion": 5,
+      "fecha": "2024-02-20"
+    },
+    {
+      "id": 6,
+      "nombre": "Sofía Martínez",
+      "edad": 26,
+      "ciudad": "Málaga",
+      "producto": "Equipo de ciclismo",
+      "opinion": "Excelente servicio y calidad. El diseño personalizado quedó exactamente como lo quería. El material es resistente y muy cómodo para largas jornadas de entrenamiento.",
+      "valoracion": 5,
+      "fecha": "2024-03-12"
+    },
+    {
+      "id": 7,
+      "nombre": "Daniel Kim",
+      "edad": 31,
+      "ciudad": "Zaragoza",
+      "producto": "Uniforme de running",
+      "opinion": "La personalización fue extremadamente detallada. Pudieron plasmar todos los logos de mi equipo perfectamente. La calidad del tejido es superior a otras marcas que he probado.",
+      "valoracion": 5,
+      "fecha": "2024-02-25"
+    },
+    {
+      "id": 8,
+      "nombre": "Elena Torres",
+      "edad": 27,
+      "ciudad": "Murcia",
+      "producto": "Ropa de entrenamiento",
+      "opinion": "El proceso de compra fue muy sencillo y el resultado final impresionante. La ropa se adapta perfectamente al cuerpo y los colores se mantienen vibrantes incluso después de múltiples lavados.",
+      "valoracion": 5,
+      "fecha": "2024-03-08"
+    },
+    {
+      "id": 9,
+      "nombre": "Javier López",
+      "edad": 33,
+      "ciudad": "Granada",
+      "producto": "Equipo de fútbol sala",
+      "opinion": "Quedamos muy satisfechos con los uniformes de todo el equipo. El diseño quedó idéntico a lo que habíamos imaginado y la atención personalizada fue excepcional.",
+      "valoracion": 5,
+      "fecha": "2024-03-01"
+    },
+    {
+      "id": 10,
+      "nombre": "Olivia Chen",
+      "edad": 30,
+      "ciudad": "Palma de Mallorca",
+      "producto": "Ropa de yoga personalizada",
+      "opinion": "La calidad de la tela es extraordinaria, perfecta para yoga. El sistema de personalización es muy completo y me permitió crear un diseño único. Entrega rápida y bien empaquetada.",
+      "valoracion": 5,
+      "fecha": "2024-02-22"
+    },
+    {
+      "id": 11,
+      "nombre": "Miguel Ángel Ruiz",
+      "edad": 24,
+      "ciudad": "Alicante",
+      "producto": "Equipo de balonmano",
+      "opinion": "El mejor ratio calidad-precio del mercado. Los uniformes quedaron perfectos y han resistido perfectamente los entrenamientos intensivos. Volveremos a confiar en Suarez Sport.",
+      "valoracion": 5,
+      "fecha": "2024-03-18"
+    },
+    {
+      "id": 12,
+      "nombre": "Isabella Rossi",
+      "edad": 29,
+      "ciudad": "Tenerife",
+      "producto": "Ropa de natación personalizada",
+      "opinion": "El material es de alta calidad y resistente al cloro. Los colores son vibrantes y el diseño personalizado se ve profesional. Muy contenta con mi experiencia de compra.",
+      "valoracion": 5,
+      "fecha": "2024-03-03"
+    }
+  ]
+}
