@@ -143,8 +143,19 @@ header:hover {
 	position: relative;
 }
 
-
-.contact{
+footer{
+	background-color: #111111;
+	min-height: 200px;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: row;
+	flex-wrap: wrap;
+	color: white;
+	position: relative;
+}
+.contact, .contactame{
 	background-color: rgba(17, 17, 17, 0.9);
 	display: flex;
 	justify-content: center;
@@ -153,73 +164,36 @@ header:hover {
 	min-height: 100px;
 	padding: 20px;
 	color: white;
+	width: 40%;
 }
-
-.contact h2{
+footer>p{
+	width: 100%;
+	text-align: center;
+}
+.contact h2, .contactame h2{
 	font-size: 2em;
 	margin-bottom: 20px;
 }
 
-.contact ul{
+.contact ul, .contactame ul{
 	display: flex;
 	justify-content: center;
 	align-items: center;
 }
-.contact ul li{
+.contact ul li, .contactame ul li{
 	list-style: none;
 	padding: 10px;
 }
-.contact ul li a img{
+.contact ul li a img, .contactame ul li a img{
 	width: 50px;
 	height: 50px;
+	background-color: rgba(250, 250, 250, 0.4);
+	border-radius: 60px;
 }
-.contact ul li a img:hover{
+.contact ul li a img:hover, .contactame ul li a img:hover{
 	width: 60px;
 	height: 60px;
 	transition: 0.3s;
-}
-
-footer{
-	background-color: #111111;
-	min-height: 200px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	color: white;
-	position: relative;
-}
-
-footer nav ul {
-	text-align: center;
-}
-
-footer nav ul li{
-	display: inline-block;
-	text-align: center;
-	padding: 10px;
-	background-color: transparent;
-}
-footer nav ul li a{
-	list-style: none;
-	text-decoration: none;
-	color: white;
-	font-size: 1.5em;
-}
-
-footer nav ul li a:hover{
-	font-size: 2em;
-	background-color: gray;
-	border-radius: 10px;
-	transition: 0.4s;
-	padding: 5px;
-}
-footer nav ul p a{
-	text-decoration: none;
-	color: white;
-}
-footer nav ul p a:hover{
-	font-size: 1.2em;
-	transition: 0.4s;
 }
 
 
