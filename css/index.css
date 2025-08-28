@@ -171,10 +171,33 @@ header:hover {
 	border-radius: 20px;
 	margin: 10px;
 }
-.faq>div h4{
-	font-size: 1.5em;
+
+.faq>div:hover{
+	background-color: rgba(250,250,250, 0.3);
+	transition: 0.3s;
+	cursor: pointer;
+}
+
+.faq>div details{
 	margin-bottom: 10px;
 }
+
+.faq>div summary{
+	font-size: 1.5em;
+	font-weight: bold;
+	margin-bottom: 10px;
+	cursor: pointer;
+}
+
+.faq>div summary:hover{
+	color: #ff6600;
+	transition: 0.3s;
+}
+
+.faq>div details[open] summary{
+	color: #ff6600;
+}
+
 .faq>div p{
 	font-size: 1.5em;
 	margin-bottom: 10px;
