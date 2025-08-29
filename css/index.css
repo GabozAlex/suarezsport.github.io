@@ -34,7 +34,7 @@ header:hover {
 	background-color: rgba(190, 190, 190, 0.7); 
 }
 .hero {
-	background-image: url('../imagenes/presentacion/hero2.jpg');
+	background-image: url('../imagenes/presentacion/hero2.webp');
 	background-size: cover;
 	background-position: top;
 	color: white;
@@ -135,7 +135,7 @@ header:hover {
 }
 
 .actions{
-	background-image: url('../imagenes/presentacion/presentacion3.jpg');
+	background-image: url('../imagenes/presentacion/presentacion3.webp');
 	background-size: cover;
 	background-position: center;
 	display: flex;
@@ -208,7 +208,7 @@ header:hover {
 }
 
 .ubicacion{
-	background-image: url('../imagenes/presentacion/presentacion4.jpg');
+	background-image: url('../imagenes/presentacion/presentacion4.webp');
 	background-size: cover;
 	background-position: center;
 	display: flex;
