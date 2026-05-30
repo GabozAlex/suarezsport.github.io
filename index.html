@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
  <meta charset="UTF-8">
  <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,14 +8,30 @@
  <meta name="keywords" content="ropa deportiva, personalización, Nueva Esparta, Suarez Sport">
  <meta name="author" content="Gabriel Rosas">
 
- <link rel="shortcut icon" href="imagenes/suarezsport.ico.png" type="image/x-icon">
+ <link rel="shortcut icon" href="imagenes/suarezsport.ico.png" type="image/png">
  <link rel="stylesheet" href="css/index.css">
  <title>Suarez Sport</title>
 </head>
 <body>
    <header>
-      <img src="imagenes/logo-solo.png" alt="">
-      <h1>Suarez Sport</h1>
+      <a href="#" style="display:flex;align-items:center;text-decoration:none;color:white;">
+         <img src="imagenes/logo-solo.png" alt="">
+         <h1>Suarez Sport</h1>
+      </a>
+      <nav class="nav" aria-label="Navegación principal">
+         <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false">
+            <span></span>
+            <span></span>
+            <span></span>
+         </button>
+         <ul class="nav-menu" id="navMenu">
+            <li><a href="#hero">Inicio</a></li>
+            <li><a href="#beneficios">Beneficios</a></li>
+            <li><a href="#testimonios">Testimonios</a></li>
+            <li><a href="#faq">FAQ</a></li>
+            <li><a href="#contacto">Contacto</a></li>
+         </ul>
+      </nav>
    </header>
    <main>
       <section class="hero" id="hero">         
@@ -23,8 +39,9 @@
          <p>
             En Suarez Sport, ofrecemos una amplia gama de ropa deportiva como camisas, pantalones cortos, conjuntos y suéteres, todos con la posibilidad de personalización y estampados exclusivos.
          </p>
+         <a href="#contacto" class="btn-hero">Solicita tu personalización</a>
       </section>
-      <section class="features">
+      <section class="features" id="beneficios">
          <h2>Ventajas de elegir Suarez Sport</h2>
          <p>
             Ropa deportiva personalizada y de alta calidad.
@@ -60,13 +77,13 @@
             </div>
          </div>
       </section>
-      <section class="actions">
+      <section class="actions" id="testimonios">
          <h2>Personaliza con Suarez Sport</h2>
          <p>
-            “Suarez Sport me permitió personalizar mi ropa deportiva de manera sencilla y rápida. Los materiales son de excelente calidad, y el servicio al cliente fue excepcional. Definitivamente volveré a comprar.” - Ava Green
+            “Suarez Sport me permitió personalizar mi ropa deportiva de manera sencilla y rápida. Los materiales son de excelente calidad, y el servicio al cliente fue excepcional. Definitivamente volveré a comprar.” - María López
          </p>
       </section>
-      <section class="faq">
+      <section class="faq" id="faq">
          <h2>Preguntas Frecuentes</h2>
          <div class="faq-item">
             <details>
@@ -93,7 +110,7 @@
             </details>
          </div>
       </section>
-      <section class="ubicacion">
+      <section class="ubicacion" id="ubicacion">
          <h2>Encuentranos</h2>
          <p>Estamos ubicados en Calle Camino Real, Paraguachí 6317, Nueva Esparta. Visítanos para ver nuestra colección y personalizar tu ropa deportiva.</p>
          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1957.594563397185!2d-63.86117571921105!3d11.099278052147017!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8c3191e182105c99%3A0x19d77e7f66c815d5!2sSuarez%20Sport!5e0!3m2!1ses-419!2sve!4v1756352159031!5m2!1ses-419!2sve" 
@@ -105,7 +122,7 @@
          referrerpolicy="no-referrer-when-downgrade">
       </iframe>
       </section>
-      <section class="contacto">
+      <section class="contacto" id="contacto">
          <form action="https://formsubmit.co/gaboalex9@gmail.com" method="post">
             <h2>Contactanos</h2>
             <label for="nombre">Nombre:</label>
@@ -127,7 +144,7 @@
          <h2>Redes Sociales</h2>
          <ul>
             <li><a href="https://www.facebook.com/profile.php?id=100066950703273" target="_blank"><img src="imagenes/facebook.png" alt="Facebook"></a></li>               
-            <li><a href="https://www.instagram.com/suarez_sport/followers/mutualOnly" target="_blank"><img src="imagenes/instagram.png" alt="Instagram"></a></li>
+            <li><a href="https://www.instagram.com/suarez_sport/" target="_blank"><img src="imagenes/instagram.png" alt="Instagram"></a></li>
             <li><a href="https://wa.me/584148287893" target="_blank"><img src="imagenes/whatsapp.png" alt="whatsapp"></a></li>
          </ul>
          <p>suarez_sport</p>
@@ -140,7 +157,7 @@
          </ul>
          <p>Gabriel Rosas</p>
       </section>
-      <p>© Allrights Reserved</p>
+      <p>© 2025 Suarez Sport. Todos los derechos reservados.</p>
    </footer>
    <script src="js/script.js"></script>
 </body>
