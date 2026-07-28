@@ -369,7 +369,8 @@ document.addEventListener('DOMContentLoaded', () => {
         ).join('%0A');
 
         const msjNotas = notas ? `%0A%0ANotas: ${notas}` : '';
-        const mensaje = `¡Hola! Quiero hacer un pedido:%0A%0A${itemsWhatsApp}%0A%0ATotal: $${total}%0A%0ADatos del cliente:%0ANombre: ${nombre}%0ATeléfono: ${telefono}%0ADirección: ${direccion}${msjNotas}`;
+        const infoPago = `%0A%0AFormas de pago: Pago móvil, transferencia o efectivo en divisas.%0ADelivery solo en Nueva Esparta.`;
+        const mensaje = `¡Hola! Quiero hacer un pedido:%0A%0A${itemsWhatsApp}%0A%0ATotal: $${total}%0A%0ADatos del cliente:%0ANombre: ${nombre}%0ATeléfono: ${telefono}%0ADirección: ${direccion}${msjNotas}${infoPago}`;
 
         window.open(`https://wa.me/584148287893?text=${mensaje}`, '_blank');
 

@@ -281,6 +281,47 @@ header h1 {
     animation: scroll-dot 2s infinite;
 }
 
+.hero-pagos {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 16px;
+    font-size: 0.85rem;
+    align-items: center;
+}
+
+.hero-pagos span {
+    padding: 4px 12px;
+    border-radius: 20px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.08);
+    color: rgba(255,255,255,0.7);
+}
+
+.checkout-info-pago {
+    background: rgba(255,102,0,0.06);
+    border: 1px solid rgba(255,102,0,0.15);
+    border-radius: 12px;
+    padding: 16px;
+    margin: 16px 0;
+}
+
+.checkout-info-pago h4 {
+    font-size: 0.9rem;
+    margin-bottom: 4px;
+    color: #ff6600;
+}
+
+.checkout-info-pago p {
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 8px;
+}
+
+.checkout-info-pago p:last-child {
+    margin-bottom: 0;
+}
+
 @keyframes scroll-bounce {
     0%, 100% { transform: translateX(-50%) translateY(0); }
     50% { transform: translateX(-50%) translateY(6px); }
