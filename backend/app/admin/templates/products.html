@@ -7,7 +7,7 @@
 </div>
 <table class="admin-table">
   <thead>
-    <tr><th>ID</th><th>Nombre</th><th>Categoría</th><th>Precio</th><th>Imágenes</th><th>Activo</th><th>Acciones</th></tr>
+    <tr><th>ID</th><th>Nombre</th><th>Categoría</th><th>Precio</th><th>Imágenes</th><th>Vistas</th><th>Activo</th><th>Acciones</th></tr>
   </thead>
   <tbody>
     {% for p in products %}
@@ -17,6 +17,7 @@
       <td>{{ p.category }}</td>
       <td>${{ p.price }}</td>
       <td>{{ p.images|length if p.images else 0 }}</td>
+      <td>{{ p.views or 0 }}</td>
       <td>
         <form method="post" action="/admin/products/{{ p.id }}/toggle" style="display:inline">
           <button class="btn btn-small {% if p.active %}btn-success{% else %}btn-secondary{% endif %}">

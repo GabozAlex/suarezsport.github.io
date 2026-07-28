@@ -1,11 +1,28 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     /* ============ CATALOGO ============ */
+    const PAGE_SIZE = 12;
+    const PAGINAS = {};
+
     const catalogoGrid = document.getElementById('catalogoGrid');
     const tabs = document.querySelectorAll('.tab-btn');
     let categoriaActiva = 'todas';
-
     let busquedaActiva = '';
+
+    let paginacionContainer = document.getElementById('paginacion');
+
+    function renderizarPaginacion(total, paginaActual) {
+        const totalPages = Math.ceil(total / PAGE_SIZE);
+        if (totalPages <= 1) {
+            paginacionContainer.innerHTML = '';
+            return;
+        }
+        let html = '';
+        for (let i = 1; i <= totalPages; i++) {
+            html += `<button class="page-btn ${i === paginaActual ? 'active' : ''}" data-page="${i}">${i}</button>`;
+        }
+        paginacionContainer.innerHTML = html;
+    }
 
     function renderizarProductos(categoria) {
         const porCategoria = categoria === 'todas'
@@ -17,10 +34,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (filtrados.length === 0) {
             catalogoGrid.innerHTML = '<p style="grid-column:1/-1;text-align:center;color:#888;padding:40px 0;">No hay productos en esta categoría.</p>';
+            paginacionContainer.innerHTML = '';
             return;
         }
 
-        catalogoGrid.innerHTML = filtrados.map(p => `
+        const paginaActual = PAGINAS[categoria] || 1;
+        const totalPages = Math.ceil(filtrados.length / PAGE_SIZE);
+        const start = (paginaActual - 1) * PAGE_SIZE;
+        const visibles = filtrados.slice(start, start + PAGE_SIZE);
+
+        catalogoGrid.innerHTML = visibles.map(p => `
             <div class="producto-card">
                 <img src="${p.imagen}" alt="${p.nombre}" loading="lazy">
                 <div class="producto-info">
@@ -32,6 +55,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
             </div>
         `).join('');
+
+        renderizarPaginacion(filtrados.length, paginaActual);
     }
 
     tabs.forEach(tab => {
@@ -39,14 +64,24 @@ document.addEventListener('DOMContentLoaded', () => {
             tabs.forEach(t => t.classList.remove('active'));
             tab.classList.add('active');
             categoriaActiva = tab.dataset.categoria;
+            PAGINAS[categoriaActiva] = 1;
             renderizarProductos(categoriaActiva);
         });
+    });
+
+    paginacionContainer.addEventListener('click', (e) => {
+        const btn = e.target.closest('.page-btn');
+        if (!btn) return;
+        const page = parseInt(btn.dataset.page);
+        PAGINAS[categoriaActiva] = page;
+        renderizarProductos(categoriaActiva);
     });
 
     const searchInput = document.getElementById('catalogoSearch');
     if (searchInput) {
         searchInput.addEventListener('input', (e) => {
             busquedaActiva = e.target.value.toLowerCase().trim();
+            PAGINAS[categoriaActiva] = 1;
             renderizarProductos(categoriaActiva);
         });
     }
@@ -62,7 +97,10 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         } catch {}
         mostrarSkeletonCatalog();
-        setTimeout(() => renderizarProductos('todas'), 300);
+        setTimeout(() => {
+            PAGINAS['todas'] = 1;
+            renderizarProductos('todas');
+        }, 300);
     }
     cargarProductos();
 
@@ -189,6 +227,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         modalOverlay.classList.add('open');
         modal.classList.add('open');
+
+        fetch(`${API_URL}/api/products/${producto.id}/view`, { method: 'POST' }).catch(() => {});
     }
 
     function cerrarModal() {

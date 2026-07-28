@@ -17,11 +17,19 @@
 
 | # | Tarea | Prioridad |
 |---|-------|-----------|
-| 1 | **Subir imágenes desde el admin** — Formulario con upload a Supabase Storage + vista previa | Alta |
-| 2 | **Migrar 58 productos de productos.js a Supabase** — Script que lee el JS y los inserta en la BD | Alta |
-| 3 | **WhatsApp flotante** — Botón fijo en la landing con ícono de WhatsApp | Media |
-| 4 | **Buscador de productos** — Input de búsqueda que filtra en tiempo real | Media |
-| 5 | **Galería de clientes** — Nueva sección con imágenes de `imagenes/clientes/` | Baja |
+| 1 | **Multi-categoría** — Cambiar `category` único a `categories` array para que un producto esté en varias categorías | Media |
+| 2 | **Más categorías** — Agregar nuevas categorías como `personalizados`, `nuevos`, `ofertas` cuando el negocio lo requiera | Baja |
+
+### ✅ Recién agregado
+
+- **Paginación** — 12 productos por página con botones numéricos, por categoría
+- **Contador de vistas** — Se incrementa al abrir el modal de un producto, visible en admin
+- **Subir imágenes desde admin** — Upload + delete en el form de producto
+- **Crear testimonios desde admin** — Formulario en la página de testimonios
+- **WhatsApp flotante** — Botón fijo con pulso en la landing
+- **Buscador de productos** — Filtro por nombre en tiempo real
+- **Galería de clientes** — Sección con imágenes de clientes
+- **Script migración** — `backend/scripts/migrar_productos.py`
 
 ---
 
