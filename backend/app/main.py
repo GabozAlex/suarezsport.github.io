@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import RedirectResponse
 from app.routers import products, testimonials, orders, contact
@@ -6,6 +7,14 @@ from app.admin.router import router as admin_router
 import os
 
 app = FastAPI(title='Suarez Sport API', docs_url='/docs')
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=['*'],
+    allow_credentials=True,
+    allow_methods=['*'],
+    allow_headers=['*'],
+)
 
 app.include_router(products.router)
 app.include_router(testimonials.router)

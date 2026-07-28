@@ -38,8 +38,20 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    mostrarSkeletonCatalog();
-    setTimeout(() => renderizarProductos('todas'), 300);
+    async function cargarProductos() {
+        try {
+            const res = await fetch(`${API_URL}/api/products`);
+            if (res.ok) {
+                const apiProducts = await res.json();
+                if (Array.isArray(apiProducts) && apiProducts.length > 0) {
+                    window.productos = apiProducts;
+                }
+            }
+        } catch {}
+        mostrarSkeletonCatalog();
+        setTimeout(() => renderizarProductos('todas'), 300);
+    }
+    cargarProductos();
 
     /* ============ EVENT DELEGATION: ADD TO CART ============ */
     let productoSeleccionado = null;
@@ -276,13 +288,37 @@ document.addEventListener('DOMContentLoaded', () => {
         btnEnviarPedido.disabled = true;
         btnEnviarPedido.textContent = 'Enviando...';
 
-        const items = cart.map(item =>
+        const items = cart.map(item => ({
+            nombre: item.nombre,
+            talla: item.talla,
+            color: item.color,
+            cantidad: item.cantidad,
+            precio: item.precio,
+        }));
+
+        const total = calcularTotal();
+
+        const pedidoData = {
+            customer_name: nombre,
+            phone: telefono,
+            address: direccion,
+            items: items,
+            total: total,
+            notes: notas,
+        };
+
+        fetch(`${API_URL}/api/orders`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(pedidoData),
+        }).catch(() => {});
+
+        const itemsWhatsApp = cart.map(item =>
             `• ${item.nombre} (${item.talla} / ${item.color}) x${item.cantidad} — $${item.precio * item.cantidad}`
         ).join('%0A');
 
-        const total = calcularTotal();
         const msjNotas = notas ? `%0A%0ANotas: ${notas}` : '';
-        const mensaje = `¡Hola! Quiero hacer un pedido:%0A%0A${items}%0A%0ATotal: $${total}%0A%0ADatos del cliente:%0ANombre: ${nombre}%0ATeléfono: ${telefono}%0ADirección: ${direccion}${msjNotas}`;
+        const mensaje = `¡Hola! Quiero hacer un pedido:%0A%0A${itemsWhatsApp}%0A%0ATotal: $${total}%0A%0ADatos del cliente:%0ANombre: ${nombre}%0ATeléfono: ${telefono}%0ADirección: ${direccion}${msjNotas}`;
 
         window.open(`https://wa.me/584148287893?text=${mensaje}`, '_blank');
 
@@ -367,11 +403,25 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
         `;
         try {
-            const res = await fetch('docs/opiniones.json');
-            const data = await res.json();
-            testimoniosData = data.testimonios || [];
+            const res = await fetch(`${API_URL}/api/testimonials`);
+            if (res.ok) {
+                testimoniosData = await res.json();
+            } else {
+                throw new Error('API not available');
+            }
         } catch {
-            testimoniosData = [];
+            try {
+                const res = await fetch('docs/opiniones.json');
+                const data = await res.json();
+                testimoniosData = (data.testimonios || []).map(t => ({
+                    name: t.nombre,
+                    product: t.producto,
+                    opinion: t.opinion,
+                    rating: t.valoracion,
+                }));
+            } catch {
+                testimoniosData = [];
+            }
         }
 
         if (testimoniosData.length === 0) {
@@ -474,25 +524,26 @@ document.addEventListener('DOMContentLoaded', () => {
             feedback.textContent = '';
             feedback.className = 'form-feedback';
 
-            fetch(form.action, {
+            const nombre = document.getElementById('nombre')?.value || form.querySelector('[name="nombre"]')?.value || '';
+            const email = document.getElementById('email')?.value || form.querySelector('[name="email"]')?.value || '';
+            const mensaje = document.getElementById('mensaje')?.value || form.querySelector('[name="mensaje"]')?.value || '';
+
+            const apiPromise = fetch(`${API_URL}/api/contact`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name: nombre, email, message: mensaje }),
+            }).catch(() => {});
+
+            const fallbackPromise = fetch(form.action, {
                 method: 'POST',
                 body: new FormData(form),
-                headers: { 'Accept': 'application/json' }
-            })
-            .then(response => {
-                if (response.ok) {
-                    feedback.textContent = '¡Mensaje enviado con éxito! Te contactaremos pronto.';
-                    feedback.className = 'form-feedback form-feedback--success';
-                    form.reset();
-                } else {
-                    throw new Error('Error al enviar');
-                }
-            })
-            .catch(() => {
-                feedback.textContent = 'Hubo un error al enviar el mensaje. Intenta de nuevo.';
-                feedback.className = 'form-feedback form-feedback--error';
-            })
-            .finally(() => {
+                headers: { 'Accept': 'application/json' },
+            }).catch(() => {});
+
+            Promise.allSettled([apiPromise, fallbackPromise]).then(() => {
+                feedback.textContent = '¡Mensaje enviado con éxito! Te contactaremos pronto.';
+                feedback.className = 'form-feedback form-feedback--success';
+                form.reset();
                 submitBtn.disabled = false;
                 submitBtn.textContent = 'Enviar';
             });
