@@ -99,6 +99,29 @@ def upload_product_image(
     return {'url': url}
 
 
+@router.post('/products/{product_id}/images/delete')
+def delete_product_image(
+    product_id: int,
+    image_url: str = Form(...),
+    _=Depends(login_required),
+):
+    product = get_one('products', {'id': f'eq.{product_id}'})
+    if not product:
+        raise HTTPException(status_code=404, detail='Product not found')
+    images = list(product.get('images') or [])
+    if image_url in images:
+        from urllib.parse import urlparse
+        filename = urlparse(image_url).path.rsplit('/', 1)[-1]
+        from app.storage_utils import borrar_imagen
+        try:
+            borrar_imagen(filename)
+        except Exception:
+            pass
+        images.remove(image_url)
+        update('products', product_id, {'images': images})
+    return RedirectResponse(url=f'/admin/products/{product_id}/edit', status_code=303)
+
+
 @router.get('/products/{product_id}/edit')
 def edit_product_form(
     request: Request,
@@ -177,6 +200,24 @@ def delete_order(order_id: int, _=Depends(login_required)):
 def list_testimonials_admin(request: Request, _=Depends(login_required)):
     testimonials = get_all('testimonials', {'select': '*', 'order': 'created_at.desc'})
     return templates.TemplateResponse('testimonials_admin.html', {'request': request, 'testimonials': testimonials})
+
+
+@router.post('/testimonials/new')
+def create_testimonial(
+    name: str = Form(...),
+    product: str = Form(...),
+    opinion: str = Form(...),
+    rating: int = Form(...),
+    _=Depends(login_required),
+):
+    insert('testimonials', {
+        'name': name,
+        'product': product,
+        'opinion': opinion,
+        'rating': min(max(rating, 1), 5),
+        'active': True,
+    })
+    return RedirectResponse(url='/admin/testimonials', status_code=303)
 
 
 @router.post('/testimonials/{testimonial_id}/toggle')

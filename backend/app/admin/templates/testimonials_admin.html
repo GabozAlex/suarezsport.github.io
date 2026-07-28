@@ -1,7 +1,34 @@
 {% extends 'base.html' %}
 {% block title %}Testimonios{% endblock %}
 {% block content %}
-<h2>Testimonios</h2>
+<div class="section-header">
+  <h2>Testimonios</h2>
+</div>
+
+<h3>Agregar testimonio</h3>
+<form method="post" action="/admin/testimonials/new" style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:2rem;max-width:600px">
+  <div>
+    <label for="t-name">Nombre</label>
+    <input type="text" id="t-name" name="name" required>
+  </div>
+  <div>
+    <label for="t-product">Producto</label>
+    <input type="text" id="t-product" name="product" required>
+  </div>
+  <div style="grid-column:1/-1">
+    <label for="t-opinion">Opinión</label>
+    <textarea id="t-opinion" name="opinion" rows="3" required></textarea>
+  </div>
+  <div>
+    <label for="t-rating">Valoración (1-5)</label>
+    <input type="number" id="t-rating" name="rating" min="1" max="5" value="5" required>
+  </div>
+  <div style="display:flex;align-items:end">
+    <button type="submit" class="btn btn-primary">Agregar testimonio</button>
+  </div>
+</form>
+
+<h3>Testimonios existentes</h3>
 <table class="admin-table">
   <thead>
     <tr><th>ID</th><th>Nombre</th><th>Producto</th><th>Opinión</th><th>Valoración</th><th>Activo</th><th>Acciones</th></tr>

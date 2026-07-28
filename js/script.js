@@ -5,10 +5,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const tabs = document.querySelectorAll('.tab-btn');
     let categoriaActiva = 'todas';
 
+    let busquedaActiva = '';
+
     function renderizarProductos(categoria) {
-        const filtrados = categoria === 'todas'
+        const porCategoria = categoria === 'todas'
             ? productos
             : productos.filter(p => p.categoria === categoria);
+        const filtrados = busquedaActiva
+            ? porCategoria.filter(p => p.nombre.toLowerCase().includes(busquedaActiva))
+            : porCategoria;
 
         if (filtrados.length === 0) {
             catalogoGrid.innerHTML = '<p style="grid-column:1/-1;text-align:center;color:#888;padding:40px 0;">No hay productos en esta categoría.</p>';
@@ -37,6 +42,14 @@ document.addEventListener('DOMContentLoaded', () => {
             renderizarProductos(categoriaActiva);
         });
     });
+
+    const searchInput = document.getElementById('catalogoSearch');
+    if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+            busquedaActiva = e.target.value.toLowerCase().trim();
+            renderizarProductos(categoriaActiva);
+        });
+    }
 
     async function cargarProductos() {
         try {
