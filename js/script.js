@@ -92,7 +92,15 @@ document.addEventListener('DOMContentLoaded', () => {
             if (res.ok) {
                 const apiProducts = await res.json();
                 if (Array.isArray(apiProducts) && apiProducts.length > 0) {
-                    window.productos = apiProducts;
+                    window.productos = apiProducts.map(p => ({
+                        id: p.id,
+                        nombre: p.name,
+                        categoria: p.category,
+                        precio: p.price,
+                        imagen: Array.isArray(p.images) && p.images.length > 0 ? p.images[0] : '',
+                        tallas: p.sizes || [],
+                        colores: p.colors || [],
+                    }));
                 }
             }
         } catch {}
@@ -134,7 +142,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function renderizarCart() {
         const body = document.getElementById('cartDrawerBody');
-        const footer = document.getElementById('cartDrawerFooter');
         const totalEl = document.getElementById('cartTotal');
         const checkoutBtn = document.getElementById('btnCheckout');
 
