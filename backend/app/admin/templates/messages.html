@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %}Mensajes{% endblock %}
+{% block content %}
+<h2>Mensajes de contacto</h2>
+<table class="admin-table">
+  <thead>
+    <tr><th>ID</th><th>Nombre</th><th>Email</th><th>Mensaje</th><th>Leído</th><th>Fecha</th><th>Acciones</th></tr>
+  </thead>
+  <tbody>
+    {% for msg in messages %}
+    <tr class="{% if not msg.read %}unread{% endif %}">
+      <td>{{ msg.id }}</td>
+      <td>{{ msg.name }}</td>
+      <td>{{ msg.email }}</td>
+      <td style="max-width:300px;">{{ msg.message[:100] }}{% if msg.message|length > 100 %}...{% endif %}</td>
+      <td>
+        <form method="post" action="/admin/messages/{{ msg.id }}/read" style="display:inline">
+          <button class="btn btn-small {% if msg.read %}btn-secondary{% else %}btn-primary{% endif %}">
+            {{ 'Leído' if msg.read else 'No leído' }}
+          </button>
+        </form>
+      </td>
+      <td>{{ msg.created_at.strftime('%d/%m/%Y') }}</td>
+      <td>
+        <form method="post" action="/admin/messages/{{ msg.id }}/delete" onsubmit="return confirm('¿Eliminar mensaje?')" style="display:inline">
+          <button class="btn btn-small btn-danger">Eliminar</button>
+        </form>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

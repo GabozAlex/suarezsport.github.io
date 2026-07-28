@@ -1,0 +1,36 @@
+VARIABLES DE ENTORNO PARA RENDER
+=================================
+
+Web Service → Environment → Add Environment Variable
+
+1. DATABASE_URL
+   postgresql://postgres:59BEahwNBtwlcX1t@db.firlktvccqsycubwpxqo.supabase.co:6543/postgres?sslmode=require
+
+2. SECRET_KEY
+   (genera una clave segura, ej: openssl rand -hex 32)
+   suarezsport-secret-key-2026-prod-change
+
+3. SUPABASE_URL
+   https://firlktvccqsycubwpxqo.supabase.co
+
+4. SUPABASE_SERVICE_KEY
+   eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZpcmxrdHZjY3FzeWN1YndweHFvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc4NTI1MjI3NSwiZXhwIjoyMTAwODI4Mjc1fQ.9Gdh1wyz-ZvNEdha1wU8Q8L4EybxxiDUeV7FgR5yaTY
+
+5. SUPABASE_BUCKET
+   productos
+
+
+CONFIGURACIÓN DEL WEB SERVICE
+==============================
+
+- Root Directory: backend
+- Build Command: pip install -r requirements.txt
+- Start Command: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+- HTTP Port: 8000
+
+
+CREAR USUARIO ADMIN (después del deploy)
+=========================================
+Render Console → Shell → pegar:
+
+python -m app.create_admin admin <tu-contraseña>

@@ -1,0 +1,71 @@
+const productos = [
+  // Camisas
+  { id: 1, nombre: 'Camisa Deportiva Clásica', categoria: 'camisas', precio: 15, imagen: 'imagenes/camisas/camisas1.PNG', tallas: ['S', 'M', 'L', 'XL'], colores: ['Negro', 'Blanco', 'Azul'] },
+  { id: 2, nombre: 'Camisa Deportiva Premium', categoria: 'camisas', precio: 18, imagen: 'imagenes/camisas/camisas2.PNG', tallas: ['S', 'M', 'L', 'XL'], colores: ['Negro', 'Rojo', 'Gris'] },
+  { id: 3, nombre: 'Camisa Entrenamiento', categoria: 'camisas', precio: 16, imagen: 'imagenes/camisas/camisas3.PNG', tallas: ['M', 'L', 'XL'], colores: ['Azul', 'Negro', 'Blanco'] },
+  { id: 4, nombre: 'Camisa Competición', categoria: 'camisas', precio: 20, imagen: 'imagenes/camisas/camisas4.PNG', tallas: ['S', 'M', 'L', 'XL'], colores: ['Rojo', 'Negro', 'Azul'] },
+  { id: 5, nombre: 'Camisa Ligera Transpirable', categoria: 'camisas', precio: 17, imagen: 'imagenes/camisas/camisas5.PNG', tallas: ['S', 'M', 'L'], colores: ['Gris', 'Negro', 'Verde'] },
+  { id: 6, nombre: 'Camisa Personalizada', categoria: 'camisas', precio: 22, imagen: 'imagenes/camisas/camisas6.PNG', tallas: ['S', 'M', 'L', 'XL'], colores: ['Negro', 'Blanco', 'Rojo', 'Azul'] },
+
+  // Shorts
+  { id: 7, nombre: 'Short Deportivo Básico', categoria: 'short', precio: 12, imagen: 'imagenes/short/short1.PNG', tallas: ['S', 'M', 'L', 'XL'], colores: ['Negro', 'Azul'] },
+  { id: 8, nombre: 'Short de Entrenamiento', categoria: 'short', precio: 14, imagen: 'imagenes/short/short2.PNG', tallas: ['S', 'M', 'L', 'XL'], colores: ['Negro', 'Gris', 'Rojo'] },
+  { id: 9, nombre: 'Short Competición', categoria: 'short', precio: 16, imagen: 'imagenes/short/short3.PNG', tallas: ['M', 'L', 'XL'], colores: ['Negro', 'Blanco', 'Azul'] },
+  { id: 10, nombre: 'Short con Bolsillos', categoria: 'short', precio: 15, imagen: 'imagenes/short/short4.PNG', tallas: ['S', 'M', 'L', 'XL'], colores: ['Negro', 'Gris'] },
+  { id: 11, nombre: 'Short de Algodón', categoria: 'short', precio: 13, imagen: 'imagenes/short/short5.PNG', tallas: ['S', 'M', 'L'], colores: ['Azul', 'Negro', 'Verde'] },
+  { id: 12, nombre: 'Short Técnico', categoria: 'short', precio: 17, imagen: 'imagenes/short/short6.PNG', tallas: ['S', 'M', 'L', 'XL'], colores: ['Negro', 'Rojo', 'Azul'] },
+  { id: 13, nombre: 'Short de Running', categoria: 'short', precio: 15, imagen: 'imagenes/short/short7.PNG', tallas: ['S', 'M', 'L'], colores: ['Negro', 'Gris', 'Naranja'] },
+  { id: 14, nombre: 'Short de Algodón Premium', categoria: 'short', precio: 18, imagen: 'imagenes/short/short8.PNG', tallas: ['M', 'L', 'XL'], colores: ['Negro', 'Blanco', 'Azul'] },
+  { id: 15, nombre: 'Short Deportivo', categoria: 'short', precio: 14, imagen: 'imagenes/short/short9.PNG', tallas: ['S', 'M', 'L', 'XL'], colores: ['Negro', 'Rojo'] },
+  { id: 16, nombre: 'Short de Algodón Ligero', categoria: 'short', precio: 16, imagen: 'imagenes/short/short10.PNG', tallas: ['S', 'M', 'L'], colores: ['Negro', 'Azul', 'Gris'] },
+  { id: 17, nombre: 'Short Personalizado', categoria: 'short', precio: 20, imagen: 'imagenes/short/short11.PNG', tallas: ['S', 'M', 'L', 'XL'], colores: ['Negro', 'Blanco', 'Rojo', 'Azul'] },
+
+  // Conjuntos
+  { id: 18, nombre: 'Conjunto Deportivo Clásico', categoria: 'conjuntos', precio: 30, imagen: 'imagenes/conjuntos/conjunto1.PNG', tallas: ['S', 'M', 'L', 'XL'], colores: ['Negro', 'Azul'] },
+  { id: 19, nombre: 'Conjunto Entrenamiento', categoria: 'conjuntos', precio: 35, imagen: 'imagenes/conjuntos/conjunto2.PNG', tallas: ['S', 'M', 'L', 'XL'], colores: ['Negro', 'Gris', 'Rojo'] },
+  { id: 20, nombre: 'Conjunto Competición', categoria: 'conjuntos', precio: 40, imagen: 'imagenes/conjuntos/conjunto3.PNG', tallas: ['M', 'L', 'XL'], colores: ['Negro', 'Blanco', 'Azul'] },
+  { id: 21, nombre: 'Conjunto Técnico', categoria: 'conjuntos', precio: 38, imagen: 'imagenes/conjuntos/conjunto4.PNG', tallas: ['S', 'M', 'L', 'XL'], colores: ['Negro', 'Rojo', 'Gris'] },
+  { id: 22, nombre: 'Conjunto Premium', categoria: 'conjuntos', precio: 45, imagen: 'imagenes/conjuntos/conjunto5.PNG', tallas: ['S', 'M', 'L', 'XL'], colores: ['Negro', 'Azul', 'Blanco'] },
+  { id: 23, nombre: 'Conjunto Ligero', categoria: 'conjuntos', precio: 32, imagen: 'imagenes/conjuntos/conjunto6.PNG', tallas: ['S', 'M', 'L'], colores: ['Gris', 'Negro', 'Verde'] },
+  { id: 24, nombre: 'Conjunto Deportivo', categoria: 'conjuntos', precio: 34, imagen: 'imagenes/conjuntos/conjunto7.PNG', tallas: ['M', 'L', 'XL'], colores: ['Negro', 'Rojo', 'Azul'] },
+  { id: 25, nombre: 'Conjunto Running', categoria: 'conjuntos', precio: 36, imagen: 'imagenes/conjuntos/conjunto8.PNG', tallas: ['S', 'M', 'L', 'XL'], colores: ['Negro', 'Gris', 'Naranja'] },
+  { id: 26, nombre: 'Conjunto Algodón', categoria: 'conjuntos', precio: 33, imagen: 'imagenes/conjuntos/conjunto9.PNG', tallas: ['S', 'M', 'L'], colores: ['Azul', 'Negro', 'Blanco'] },
+  { id: 27, nombre: 'Conjunto Personalizado', categoria: 'conjuntos', precio: 50, imagen: 'imagenes/conjuntos/conjunto10.PNG', tallas: ['S', 'M', 'L', 'XL'], colores: ['Negro', 'Blanco', 'Rojo', 'Azul'] },
+
+  // Suéteres
+  { id: 28, nombre: 'Suéter Deportivo Clásico', categoria: 'sueter', precio: 25, imagen: 'imagenes/sueter/sweater1.PNG', tallas: ['S', 'M', 'L', 'XL'], colores: ['Negro', 'Gris'] },
+  { id: 29, nombre: 'Suéter con Capucha', categoria: 'sueter', precio: 30, imagen: 'imagenes/sueter/sweater2.PNG', tallas: ['S', 'M', 'L', 'XL'], colores: ['Negro', 'Azul', 'Rojo'] },
+  { id: 30, nombre: 'Suéter Cremallera', categoria: 'sueter', precio: 32, imagen: 'imagenes/sueter/sweater3.PNG', tallas: ['M', 'L', 'XL'], colores: ['Negro', 'Gris', 'Azul'] },
+  { id: 31, nombre: 'Suéter Ligero', categoria: 'sueter', precio: 22, imagen: 'imagenes/sueter/sweater4.PNG', tallas: ['S', 'M', 'L'], colores: ['Negro', 'Blanco', 'Gris'] },
+  { id: 32, nombre: 'Suéter Premium', categoria: 'sueter', precio: 35, imagen: 'imagenes/sueter/sweater5.PNG', tallas: ['S', 'M', 'L', 'XL'], colores: ['Negro', 'Rojo', 'Azul'] },
+  { id: 33, nombre: 'Suéter Deportivo', categoria: 'sueter', precio: 28, imagen: 'imagenes/sueter/sweater6.PNG', tallas: ['S', 'M', 'L', 'XL'], colores: ['Negro', 'Gris', 'Verde'] },
+  { id: 34, nombre: 'Suéter Algodón', categoria: 'sueter', precio: 26, imagen: 'imagenes/sueter/sweater7.PNG', tallas: ['S', 'M', 'L'], colores: ['Negro', 'Azul', 'Blanco'] },
+  { id: 35, nombre: 'Suéter Técnico', categoria: 'sueter', precio: 33, imagen: 'imagenes/sueter/sweater8.PNG', tallas: ['M', 'L', 'XL'], colores: ['Negro', 'Gris', 'Rojo'] },
+  { id: 36, nombre: 'Suéter Personalizado', categoria: 'sueter', precio: 38, imagen: 'imagenes/sueter/sweater9.PNG', tallas: ['S', 'M', 'L', 'XL'], colores: ['Negro', 'Blanco', 'Rojo', 'Azul'] },
+
+  // Accesorios
+  { id: 37, nombre: 'Gorra Deportiva', categoria: 'accesorios', precio: 10, imagen: 'imagenes/accesorios/accesorio1.PNG', tallas: ['Única'], colores: ['Negro', 'Azul', 'Rojo'] },
+  { id: 38, nombre: 'Muñequera', categoria: 'accesorios', precio: 5, imagen: 'imagenes/accesorios/accesorio2.PNG', tallas: ['Única'], colores: ['Negro', 'Blanco', 'Gris'] },
+  { id: 39, nombre: 'Cinta Deportiva', categoria: 'accesorios', precio: 4, imagen: 'imagenes/accesorios/accesorio3.PNG', tallas: ['Única'], colores: ['Negro', 'Rojo', 'Azul'] },
+  { id: 40, nombre: 'Bolso Deportivo', categoria: 'accesorios', precio: 20, imagen: 'imagenes/accesorios/accesorio4.PNG', tallas: ['Única'], colores: ['Negro', 'Gris'] },
+  { id: 41, nombre: 'Rodillera', categoria: 'accesorios', precio: 12, imagen: 'imagenes/accesorios/accesorio5.PNG', tallas: ['Única'], colores: ['Negro', 'Azul'] },
+  { id: 42, nombre: 'Coderas', categoria: 'accesorios', precio: 10, imagen: 'imagenes/accesorios/accesorio6.PNG', tallas: ['Única'], colores: ['Negro', 'Gris'] },
+  { id: 43, nombre: 'Mochila Deportiva', categoria: 'accesorios', precio: 25, imagen: 'imagenes/accesorios/accesorio7.PNG', tallas: ['Única'], colores: ['Negro', 'Azul', 'Rojo'] },
+
+  // Uniformes
+  { id: 44, nombre: 'Uniforme Fútbol', categoria: 'uniformes', precio: 35, imagen: 'imagenes/uniformes/uniforme1.PNG', tallas: ['S', 'M', 'L', 'XL'], colores: ['Blanco', 'Negro', 'Azul'] },
+  { id: 45, nombre: 'Uniforme Fútbol Personalizado', categoria: 'uniformes', precio: 45, imagen: 'imagenes/uniformes/uniforme2.PNG', tallas: ['S', 'M', 'L', 'XL'], colores: ['Blanco', 'Rojo', 'Negro'] },
+  { id: 46, nombre: 'Uniforme Baloncesto', categoria: 'uniformes', precio: 38, imagen: 'imagenes/uniformes/uniforme3.PNG', tallas: ['S', 'M', 'L', 'XL'], colores: ['Azul', 'Blanco', 'Negro'] },
+  { id: 47, nombre: 'Uniforme Baloncesto Personalizado', categoria: 'uniformes', precio: 48, imagen: 'imagenes/uniformes/uniforme4.PNG', tallas: ['S', 'M', 'L', 'XL'], colores: ['Rojo', 'Negro', 'Blanco'] },
+  { id: 48, nombre: 'Uniforme Béisbol', categoria: 'uniformes', precio: 40, imagen: 'imagenes/uniformes/uniforme5.PNG', tallas: ['S', 'M', 'L', 'XL'], colores: ['Blanco', 'Gris', 'Azul'] },
+  { id: 49, nombre: 'Uniforme Béisbol Personalizado', categoria: 'uniformes', precio: 50, imagen: 'imagenes/uniformes/uniforme6.PNG', tallas: ['S', 'M', 'L', 'XL'], colores: ['Gris', 'Blanco', 'Negro'] },
+  { id: 50, nombre: 'Uniforme Voleibol', categoria: 'uniformes', precio: 35, imagen: 'imagenes/uniformes/uniforme7.PNG', tallas: ['S', 'M', 'L', 'XL'], colores: ['Azul', 'Blanco', 'Rojo'] },
+  { id: 51, nombre: 'Uniforme Voleibol Personalizado', categoria: 'uniformes', precio: 45, imagen: 'imagenes/uniformes/uniforme8.PNG', tallas: ['S', 'M', 'L', 'XL'], colores: ['Rojo', 'Blanco', 'Negro'] },
+  { id: 52, nombre: 'Uniforme Fútbol Sala', categoria: 'uniformes', precio: 35, imagen: 'imagenes/uniformes/uniforme9.PNG', tallas: ['S', 'M', 'L', 'XL'], colores: ['Verde', 'Blanco', 'Negro'] },
+  { id: 53, nombre: 'Uniforme Fútbol Sala Personalizado', categoria: 'uniformes', precio: 45, imagen: 'imagenes/uniformes/uniforme10.PNG', tallas: ['S', 'M', 'L', 'XL'], colores: ['Negro', 'Verde', 'Blanco'] },
+  { id: 54, nombre: 'Uniforme Running', categoria: 'uniformes', precio: 30, imagen: 'imagenes/uniformes/uniforme11.PNG', tallas: ['S', 'M', 'L', 'XL'], colores: ['Negro', 'Gris', 'Naranja'] },
+  { id: 55, nombre: 'Uniforme Running Personalizado', categoria: 'uniformes', precio: 40, imagen: 'imagenes/uniformes/uniforme12.PNG', tallas: ['S', 'M', 'L', 'XL'], colores: ['Naranja', 'Negro', 'Gris'] },
+  { id: 56, nombre: 'Uniforme Entrenamiento', categoria: 'uniformes', precio: 32, imagen: 'imagenes/uniformes/uniforme13.PNG', tallas: ['S', 'M', 'L', 'XL'], colores: ['Azul', 'Negro', 'Gris'] },
+  { id: 57, nombre: 'Uniforme Personalizado Completo', categoria: 'uniformes', precio: 55, imagen: 'imagenes/uniformes/uniforme14.PNG', tallas: ['S', 'M', 'L', 'XL'], colores: ['Personalizable'] },
+  { id: 58, nombre: 'Uniforme Deportivo Premium', categoria: 'uniformes', precio: 42, imagen: 'imagenes/uniformes/uniforme15.PNG', tallas: ['S', 'M', 'L', 'XL'], colores: ['Negro', 'Blanco', 'Rojo', 'Azul'] },
+]

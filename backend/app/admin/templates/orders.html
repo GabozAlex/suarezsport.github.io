@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block title %}Pedidos{% endblock %}
+{% block content %}
+<h2>Pedidos</h2>
+<table class="admin-table">
+  <thead>
+    <tr><th>ID</th><th>Cliente</th><th>Teléfono</th><th>Dirección</th><th>Items</th><th>Total</th><th>Estado</th><th>Fecha</th><th>Acciones</th></tr>
+  </thead>
+  <tbody>
+    {% for order in orders %}
+    <tr>
+      <td>#{{ order.id }}</td>
+      <td>{{ order.customer_name }}</td>
+      <td>{{ order.phone }}</td>
+      <td style="max-width:200px;overflow:hidden;text-overflow:ellipsis;">{{ order.address }}</td>
+      <td>{{ order.items|length }} items</td>
+      <td>${{ order.total }}</td>
+      <td>
+        <form method="post" action="/admin/orders/{{ order.id }}/status">
+          <select name="status_val" onchange="this.form.submit()">
+            {% for s in ['pendiente', 'confirmado', 'enviado', 'entregado'] %}
+            <option value="{{ s }}" {% if order.status.value == s %}selected{% endif %}>{{ s }}</option>
+            {% endfor %}
+          </select>
+        </form>
+      </td>
+      <td>{{ order.created_at.strftime('%d/%m/%Y') }}</td>
+      <td>
+        <form method="post" action="/admin/orders/{{ order.id }}/delete" onsubmit="return confirm('¿Eliminar pedido?')" style="display:inline">
+          <button class="btn btn-small btn-danger">Eliminar</button>
+        </form>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

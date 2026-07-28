@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %}{{ 'Editar' if product else 'Nuevo' }} producto{% endblock %}
+{% block content %}
+<h2>{{ 'Editar' if product else 'Nuevo' }} producto</h2>
+<form method="post" action="{{ '/admin/products/' ~ product.id ~ '/edit' if product else '/admin/products' }}">
+  <label for="name">Nombre</label>
+  <input type="text" id="name" name="name" value="{{ product.name if product else '' }}" required>
+
+  <label for="description">Descripción</label>
+  <textarea id="description" name="description" rows="3">{{ product.description if product else '' }}</textarea>
+
+  <label for="category">Categoría</label>
+  <select id="category" name="category" required>
+    {% for cat in ['camisas', 'short', 'conjuntos', 'sueter', 'accesorios', 'uniformes'] %}
+    <option value="{{ cat }}" {% if product and product.category == cat %}selected{% endif %}>{{ cat|capitalize }}</option>
+    {% endfor %}
+  </select>
+
+  <label for="price">Precio ($)</label>
+  <input type="number" step="0.01" id="price" name="price" value="{{ product.price if product else '' }}" required>
+
+  <label for="sizes">Tallas (separadas por coma)</label>
+  <input type="text" id="sizes" name="sizes" value="{{ product.sizes|join(', ') if product and product.sizes else 'S, M, L, XL' }}">
+
+  <label for="colors">Colores (separados por coma)</label>
+  <input type="text" id="colors" name="colors" value="{{ product.colors|join(', ') if product and product.colors else 'Negro, Blanco' }}">
+
+  <button type="submit" class="btn btn-primary">{{ 'Guardar cambios' if product else 'Crear producto' }}</button>
+  <a href="/admin/products" class="btn">Cancelar</a>
+</form>
+{% endblock %}

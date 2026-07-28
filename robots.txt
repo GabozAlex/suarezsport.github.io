@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://suarezsport.github.io/sitemap.xml

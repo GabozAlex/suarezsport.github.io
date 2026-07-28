@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Admin{% endblock %} — Suarez Sport</title>
+  <link rel="stylesheet" href="/admin/static/admin.css">
+</head>
+<body>
+  {% if request.cookies.get('token') %}
+  <nav class="admin-nav">
+    <a href="/admin/dashboard" class="nav-brand">Suarez Sport Admin</a>
+    <div class="nav-links">
+      <a href="/admin/dashboard">Dashboard</a>
+      <a href="/admin/products">Productos</a>
+      <a href="/admin/orders">Pedidos</a>
+      <a href="/admin/testimonials">Testimonios</a>
+      <a href="/admin/messages">Mensajes</a>
+      <a href="/admin/logout" class="nav-logout">Cerrar sesión</a>
+    </div>
+  </nav>
+  {% endif %}
+  <main class="admin-main">
+    {% block content %}{% endblock %}
+  </main>
+</body>
+</html>

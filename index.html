@@ -4,18 +4,67 @@
  <meta charset="UTF-8">
  <meta http-equiv="X-UA-Compatible" content="IE=edge">
  <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <meta name="description" content="Suarez Sport: Ropa deportiva personalizada en Nueva Esparta. Camisas, conjuntos, suéteres y más.">
- <meta name="keywords" content="ropa deportiva, personalización, Nueva Esparta, Suarez Sport">
+ <meta name="description" content="Suarez Sport: Ropa deportiva personalizada en Nueva Esparta, Venezuela. Camisas, shorts, conjuntos, suéteres, accesorios y uniformes deportivos. Calidad superior y diseño único.">
+ <meta name="keywords" content="ropa deportiva, personalización, Nueva Esparta, Suarez Sport, uniformes deportivos, camisas personalizadas">
  <meta name="author" content="Gabriel Rosas">
+ <meta name="robots" content="index, follow">
 
+ <!-- Open Graph -->
+ <meta property="og:title" content="Suarez Sport - Ropa Deportiva Personalizada">
+ <meta property="og:description" content="Ropa deportiva personalizada en Nueva Esparta. Camisas, shorts, conjuntos, suéteres, accesorios y uniformes. Calidad superior y diseño único.">
+ <meta property="og:image" content="https://suarezsport.github.io/imagenes/logo-completo.png">
+ <meta property="og:image:width" content="1200">
+ <meta property="og:image:height" content="630">
+ <meta property="og:url" content="https://suarezsport.github.io">
+ <meta property="og:type" content="website">
+ <meta property="og:locale" content="es_ES">
+
+ <!-- Twitter Cards -->
+ <meta name="twitter:card" content="summary_large_image">
+ <meta name="twitter:title" content="Suarez Sport - Ropa Deportiva Personalizada">
+ <meta name="twitter:description" content="Ropa deportiva personalizada en Nueva Esparta. Camisas, shorts, conjuntos, suéteres, accesorios y uniformes.">
+ <meta name="twitter:image" content="https://suarezsport.github.io/imagenes/logo-completo.png">
+
+ <link rel="canonical" href="https://suarezsport.github.io">
  <link rel="shortcut icon" href="imagenes/suarezsport.ico.png" type="image/png">
+ <link rel="preconnect" href="https://www.google.com">
+ <link rel="preconnect" href="https://formsubmit.co">
+ <link rel="dns-prefetch" href="https://www.google.com">
  <link rel="stylesheet" href="css/index.css">
- <title>Suarez Sport</title>
+ <title>Suarez Sport - Ropa Deportiva Personalizada en Nueva Esparta</title>
+
+ <script type="application/ld+json">
+ {
+   "@context": "https://schema.org",
+   "@type": "Store",
+   "name": "Suarez Sport",
+   "url": "https://suarezsport.github.io",
+   "logo": "https://suarezsport.github.io/imagenes/logo-completo.png",
+   "description": "Tienda de ropa deportiva personalizada en Nueva Esparta, Venezuela.",
+   "address": {
+     "@type": "PostalAddress",
+     "streetAddress": "Calle Camino Real",
+     "addressLocality": "Paraguachí",
+     "addressRegion": "Nueva Esparta",
+     "addressCountry": "VE"
+   },
+   "contactPoint": {
+     "@type": "ContactPoint",
+     "telephone": "+58-414-8287893",
+     "contactType": "sales",
+     "availableLanguage": ["es"]
+   },
+   "sameAs": [
+     "https://www.facebook.com/profile.php?id=100066950703273",
+     "https://www.instagram.com/suarez_sport/"
+   ]
+ }
+ </script>
 </head>
 <body>
    <header>
       <a href="#" style="display:flex;align-items:center;text-decoration:none;color:white;">
-         <img src="imagenes/logo-solo.png" alt="">
+         <img src="imagenes/logo-solo.png" alt="Suarez Sport logo">
          <h1>Suarez Sport</h1>
       </a>
       <nav class="nav" aria-label="Navegación principal">
@@ -25,51 +74,122 @@
             <span></span>
          </button>
          <ul class="nav-menu" id="navMenu">
-            <li><a href="#hero">Inicio</a></li>
-            <li><a href="#beneficios">Beneficios</a></li>
-            <li><a href="#testimonios">Testimonios</a></li>
-            <li><a href="#faq">FAQ</a></li>
-            <li><a href="#contacto">Contacto</a></li>
-         </ul>
-      </nav>
-   </header>
-   <main>
+             <li><a href="#hero">Inicio</a></li>
+             <li><a href="#beneficios">Beneficios</a></li>
+             <li><a href="#catalogo">Catálogo</a></li>
+             <li><a href="#testimonios">Testimonios</a></li>
+             <li><a href="#faq">FAQ</a></li>
+             <li><a href="#contacto">Contacto</a></li>
+          </ul>
+          <button class="cart-btn" id="cartBtn" aria-label="Abrir carrito">
+             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
+                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+             </svg>
+             <span class="cart-count" id="cartCount">0</span>
+          </button>
+       </nav>
+    </header>
+    <div class="cart-overlay" id="cartOverlay"></div>
+    <aside class="cart-drawer" id="cartDrawer" aria-label="Carrito de compras">
+       <div class="cart-drawer-header">
+          <button class="cart-drawer-back" id="cartDrawerBack" aria-label="Volver al carrito">
+             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5m7-7-7 7 7 7"/></svg>
+          </button>
+          <h3 id="cartDrawerTitle">Carrito</h3>
+          <button class="cart-drawer-close" id="cartDrawerClose" aria-label="Cerrar carrito">&times;</button>
+       </div>
+
+       <div class="cart-view" id="cartView">
+          <div class="cart-drawer-body" id="cartDrawerBody">
+             <p class="cart-empty">Tu carrito está vacío</p>
+          </div>
+          <div class="cart-drawer-footer" id="cartDrawerFooter">
+             <div class="cart-total">
+                <span>Total:</span>
+                <span id="cartTotal">$0</span>
+             </div>
+             <button class="btn-checkout" id="btnCheckout">Finalizar pedido</button>
+          </div>
+       </div>
+
+       <div class="checkout-view" id="checkoutView">
+          <div class="checkout-body">
+             <div class="checkout-resumen" id="checkoutResumen"></div>
+             <form class="checkout-form" id="checkoutForm">
+                <label for="checkoutNombre">Nombre completo</label>
+                <input type="text" id="checkoutNombre" required placeholder="Tu nombre">
+
+                <label for="checkoutTelefono">Teléfono</label>
+                <input type="tel" id="checkoutTelefono" required placeholder="0412-1234567">
+
+                <label for="checkoutDireccion">Dirección de envío</label>
+                <textarea id="checkoutDireccion" rows="3" required placeholder="Dirección completa"></textarea>
+
+                <label for="checkoutNotas">Notas adicionales</label>
+                <textarea id="checkoutNotas" rows="2" placeholder="Alguna instrucción especial"></textarea>
+
+                <button type="submit" class="btn-enviar-pedido" id="btnEnviarPedido">Enviar pedido por WhatsApp</button>
+             </form>
+          </div>
+       </div>
+    </aside>
+
+    <div class="modal-overlay" id="modalOverlay"></div>
+    <div class="modal" id="modalProducto">
+       <div class="modal-header">
+          <h3 id="modalProductoNombre"></h3>
+          <button class="modal-close" id="modalClose" aria-label="Cerrar">&times;</button>
+       </div>
+       <div class="modal-body">
+          <img id="modalProductoImg" src="" alt="">
+          <div class="modal-opciones">
+             <label for="modalTalla">Talla:</label>
+             <select id="modalTalla"></select>
+             <label for="modalColor">Color:</label>
+             <select id="modalColor"></select>
+          </div>
+          <button class="btn-confirmar-carrito" id="btnConfirmarCarrito">Añadir al carrito</button>
+       </div>
+    </div>
+
+    <main>
       <section class="hero" id="hero">         
-         <h2>Ropa deportiva personalizada a tu estilo</h2>
-         <p>
+         <h2 class="animate-on-scroll">Ropa deportiva personalizada a tu estilo</h2>
+         <p class="animate-on-scroll animate-delay-1">
             En Suarez Sport, ofrecemos una amplia gama de ropa deportiva como camisas, pantalones cortos, conjuntos y suéteres, todos con la posibilidad de personalización y estampados exclusivos.
          </p>
-         <a href="#contacto" class="btn-hero">Solicita tu personalización</a>
+         <a href="#contacto" class="btn-hero animate-on-scroll animate-delay-2">Solicita tu personalización</a>
       </section>
       <section class="features" id="beneficios">
-         <h2>Ventajas de elegir Suarez Sport</h2>
-         <p>
+         <h2 class="animate-on-scroll">Ventajas de elegir Suarez Sport</h2>
+         <p class="animate-on-scroll animate-delay-1">
             Ropa deportiva personalizada y de alta calidad.
          </p>
          <div class="list-cards">
-            <div class="card">
-               <img src="imagenes/presentacion/personalizacion.jpeg" alt="">
+            <div class="card animate-on-scroll animate-left">
+               <img src="imagenes/presentacion/personalizacion.webp" alt="Prendas personalizadas Suarez Sport">
                <h4>Personalización Facil</h4>
                <p>
                   Ofrecemos opciones de personalización para que puedas tener ropa deportiva única. Desde elegir colores hasta añadir logos, todo es posible con Suarez Sport.
                </p>
             </div>
-            <div class="card">
-               <img src="imagenes/presentacion/calidad.webp" alt="">
+            <div class="card animate-on-scroll animate-delay-1">
+               <img src="imagenes/presentacion/calidad.webp" alt="Material de alta calidad">
                <h4>Calidad Superior</h4>
                <p>
                   Nuestra ropa está confeccionada con materiales de alta calidad que garantizan durabilidad y confort, permitiéndote rendir al máximo en tus actividades deportivas.
                </p>
             </div>
-            <div class="card">
-               <img src="imagenes/presentacion/variedad.jpeg" alt="">
+            <div class="card animate-on-scroll animate-right">
+               <img src="imagenes/presentacion/variedad.webp" alt="Variedad de productos deportivos">
                <h4>Variedad de peroductos</h4>
                <p>
                   Contamos con una amplia variedad de productos, desde camisas y pantalones cortos hasta conjuntos y suéteres, para satisfacer todas tus necesidades deportivas.
                </p>
             </div>
-            <div class="card">
-               <img src="imagenes/presentacion/atencion.webp" alt="">
+            <div class="card animate-on-scroll animate-left animate-delay-2">
+               <img src="imagenes/presentacion/atencion.webp" alt="Atención al cliente personalizada">
                <h4>Atencion al cliente</h4>
                <p>
                   Nuestro equipo está siempre disponible para ayudarte a elegir y personalizar tu ropa deportiva, asegurando una experiencia de compra satisfactoria.
@@ -77,42 +197,69 @@
             </div>
          </div>
       </section>
-      <section class="actions" id="testimonios">
-         <h2>Personaliza con Suarez Sport</h2>
-         <p>
-            “Suarez Sport me permitió personalizar mi ropa deportiva de manera sencilla y rápida. Los materiales son de excelente calidad, y el servicio al cliente fue excepcional. Definitivamente volveré a comprar.” - María López
-         </p>
+      <section class="catalogo" id="catalogo">
+         <h2 class="animate-on-scroll">Nuestros Productos</h2>
+         <p class="animate-on-scroll animate-delay-1">Explora nuestras categorías y encuentra tu estilo</p>
+         <div class="catalogo-tabs animate-on-scroll animate-delay-2" id="catalogoTabs">
+            <button class="tab-btn active" data-categoria="todas">Todas</button>
+            <button class="tab-btn" data-categoria="camisas">Camisas</button>
+            <button class="tab-btn" data-categoria="short">Shorts</button>
+            <button class="tab-btn" data-categoria="conjuntos">Conjuntos</button>
+            <button class="tab-btn" data-categoria="sueter">Suéteres</button>
+            <button class="tab-btn" data-categoria="accesorios">Accesorios</button>
+            <button class="tab-btn" data-categoria="uniformes">Uniformes</button>
+         </div>
+         <div class="catalogo-grid" id="catalogoGrid"></div>
+      </section>
+      <section class="testimonios" id="testimonios">
+         <h2 class="animate-on-scroll">Lo que dicen nuestros clientes</h2>
+         <p class="testimonios-sub animate-on-scroll animate-delay-1">Más de 100 clientes satisfechos confían en nosotros</p>
+         <div class="testimonios-contenedor" id="testimoniosContenedor">
+            <div class="testimonios-track" id="testimoniosTrack">
+               <div class="testimonio-card">
+                  <div class="testimonio-estrellas">★★★★★</div>
+                  <p class="testimonio-texto">Cargando testimonios...</p>
+                  <div class="testimonio-autor">
+                     <span class="testimonio-nombre">— </span>
+                     <span class="testimonio-ciudad"></span>
+                  </div>
+               </div>
+            </div>
+            <button class="testimonio-btn testimonio-prev" id="testimonioPrev" aria-label="Anterior">‹</button>
+            <button class="testimonio-btn testimonio-next" id="testimonioNext" aria-label="Siguiente">›</button>
+         </div>
+         <div class="testimonios-dots" id="testimoniosDots"></div>
       </section>
       <section class="faq" id="faq">
-         <h2>Preguntas Frecuentes</h2>
-         <div class="faq-item">
-            <details>
-            <summary>¿Qué tipos de personalización ofrecen?</summary>
+         <h2 class="animate-on-scroll">Preguntas Frecuentes</h2>
+         <div class="faq-item animate-on-scroll animate-left">
+             <details>
+             <summary>¿Qué tipos de personalización ofrecen?</summary>
             <p>Ofrecemos opciones como estampados, bordados y selección de colores para que puedas crear ropa deportiva única.</p>
             </details>            
-         </div>
-         <div class="faq-item">
-            <details>
-            <summary>¿Cuánto tiempo tarda la entrega?</summary>
+          </div>
+          <div class="faq-item animate-on-scroll animate-right animate-delay-1">
+             <details>
+             <summary>¿Cuánto tiempo tarda la entrega?</summary>
             <p>El tiempo de entrega varía según la personalización, pero generalmente toma entre 7 a 14 días hábiles.</p>
             </details>            
-         </div>
-         <div class="faq-item">
-            <details>
-            <summary>¿Puedo devolver o cambiar un producto personalizado?</summary>
+          </div>
+          <div class="faq-item animate-on-scroll animate-left animate-delay-2">
+             <details>
+             <summary>¿Puedo devolver o cambiar un producto personalizado?</summary>
             <p>Debido a la naturaleza personalizada de nuestros productos, no aceptamos devoluciones o cambios, salvo en casos de defectos de fabricación.</p>
             </details>            
-         </div>
-         <div class="faq-item">
-            <details>
-            <summary>¿Ofrecen descuentos para pedidos al por mayor?</summary>
+          </div>
+          <div class="faq-item animate-on-scroll animate-right animate-delay-3">
+             <details>
+             <summary>¿Ofrecen descuentos para pedidos al por mayor?</summary>
             <p>Sí, ofrecemos descuentos especiales para pedidos al por mayor. Contáctanos para más detalles.</p>
             </details>
          </div>
       </section>
       <section class="ubicacion" id="ubicacion">
-         <h2>Encuentranos</h2>
-         <p>Estamos ubicados en Calle Camino Real, Paraguachí 6317, Nueva Esparta. Visítanos para ver nuestra colección y personalizar tu ropa deportiva.</p>
+         <h2 class="animate-on-scroll">Encuentranos</h2>
+         <p class="animate-on-scroll animate-delay-1">Estamos ubicados en Calle Camino Real, Paraguachí 6317, Nueva Esparta. Visítanos para ver nuestra colección y personalizar tu ropa deportiva.</p>
          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1957.594563397185!2d-63.86117571921105!3d11.099278052147017!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8c3191e182105c99%3A0x19d77e7f66c815d5!2sSuarez%20Sport!5e0!3m2!1ses-419!2sve!4v1756352159031!5m2!1ses-419!2sve" 
          width="80%" 
          height="500px" 
@@ -123,7 +270,7 @@
       </iframe>
       </section>
       <section class="contacto" id="contacto">
-         <form action="https://formsubmit.co/gaboalex9@gmail.com" method="post">
+         <form class="animate-on-scroll" action="https://formsubmit.co/gaboalex9@gmail.com" method="post">
             <h2>Contactanos</h2>
             <label for="nombre">Nombre:</label>
             <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required>
@@ -159,6 +306,7 @@
       </section>
       <p>© 2025 Suarez Sport. Todos los derechos reservados.</p>
    </footer>
+   <script src="js/productos.js"></script>
    <script src="js/script.js"></script>
 </body>
 </html>

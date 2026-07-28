@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+<div class="stats-grid">
+  <div class="stat-card">
+    <span class="stat-number">{{ stats.products }}</span>
+    <span class="stat-label">Productos</span>
+  </div>
+  <div class="stat-card">
+    <span class="stat-number">{{ stats.orders }}</span>
+    <span class="stat-label">Pedidos</span>
+  </div>
+  <div class="stat-card">
+    <span class="stat-number">{{ stats.testimonials }}</span>
+    <span class="stat-label">Testimonios</span>
+  </div>
+  <div class="stat-card">
+    <span class="stat-number">{{ stats.messages }}</span>
+    <span class="stat-label">Mensajes no leídos</span>
+  </div>
+</div>
+
+<h3>Últimos pedidos</h3>
+<table class="admin-table">
+  <thead>
+    <tr><th>ID</th><th>Cliente</th><th>Total</th><th>Estado</th><th>Fecha</th></tr>
+  </thead>
+  <tbody>
+    {% for order in recent_orders %}
+    <tr>
+      <td>#{{ order.id }}</td>
+      <td>{{ order.customer_name }}</td>
+      <td>${{ order.total }}</td>
+      <td><span class="badge badge-{{ order.status.value }}">{{ order.status.value }}</span></td>
+      <td>{{ order.created_at.strftime('%d/%m/%Y') }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %}Testimonios{% endblock %}
+{% block content %}
+<h2>Testimonios</h2>
+<table class="admin-table">
+  <thead>
+    <tr><th>ID</th><th>Nombre</th><th>Producto</th><th>Opinión</th><th>Valoración</th><th>Activo</th><th>Acciones</th></tr>
+  </thead>
+  <tbody>
+    {% for t in testimonials %}
+    <tr>
+      <td>{{ t.id }}</td>
+      <td>{{ t.name }}</td>
+      <td>{{ t.product }}</td>
+      <td style="max-width:300px;">{{ t.opinion[:100] }}{% if t.opinion|length > 100 %}...{% endif %}</td>
+      <td>{{ '★' * t.rating }}{{ '☆' * (5 - t.rating) }}</td>
+      <td>
+        <form method="post" action="/admin/testimonials/{{ t.id }}/toggle" style="display:inline">
+          <button class="btn btn-small {% if t.active %}btn-success{% else %}btn-secondary{% endif %}">
+            {{ 'Sí' if t.active else 'No' }}
+          </button>
+        </form>
+      </td>
+      <td>
+        <form method="post" action="/admin/testimonials/{{ t.id }}/delete" onsubmit="return confirm('¿Eliminar testimonio?')" style="display:inline">
+          <button class="btn btn-small btn-danger">Eliminar</button>
+        </form>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
