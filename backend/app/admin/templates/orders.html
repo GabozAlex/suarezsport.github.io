@@ -13,7 +13,7 @@
       <td>{{ order.customer_name }}</td>
       <td>{{ order.phone }}</td>
       <td style="max-width:200px;overflow:hidden;text-overflow:ellipsis;">{{ order.address }}</td>
-      <td>{{ order.items|length }} items</td>
+      <td>{{ (order.items or [])|length }} items</td>
       <td>${{ order.total }}</td>
       <td>
         <form method="post" action="/admin/orders/{{ order.id }}/status">
@@ -24,7 +24,7 @@
           </select>
         </form>
       </td>
-      <td>{{ order.created_at[:10] }}</td>
+      <td>{{ (order.created_at or '')[:10] }}</td>
       <td>
         <form method="post" action="/admin/orders/{{ order.id }}/delete" onsubmit="return confirm('¿Eliminar pedido?')" style="display:inline">
           <button class="btn btn-small btn-danger">Eliminar</button>
