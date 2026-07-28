@@ -10,7 +10,6 @@ CREATE TABLE IF NOT EXISTS products (
   sizes JSONB DEFAULT '[]',
   colors JSONB DEFAULT '[]',
   active BOOLEAN DEFAULT TRUE,
-  views INTEGER DEFAULT 0,
   created_at TIMESTAMPTZ DEFAULT NOW(),
   updated_at TIMESTAMPTZ DEFAULT NOW()
 );

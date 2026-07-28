@@ -23,7 +23,7 @@
 ### ✅ Recién agregado
 
 - **Paginación** — 12 productos por página con botones numéricos, por categoría
-- **Contador de vistas** — Se incrementa al abrir el modal de un producto, visible en admin
+
 - **Subir imágenes desde admin** — Upload + delete en el form de producto
 - **Crear testimonios desde admin** — Formulario en la página de testimonios
 - **WhatsApp flotante** — Botón fijo con pulso en la landing

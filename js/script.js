@@ -227,8 +227,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         modalOverlay.classList.add('open');
         modal.classList.add('open');
-
-        fetch(`${API_URL}/api/products/${producto.id}/view`, { method: 'POST' }).catch(() => {});
     }
 
     function cerrarModal() {
