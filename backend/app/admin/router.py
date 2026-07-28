@@ -1,33 +1,17 @@
 from fastapi import APIRouter, Depends, HTTPException, status, Form, UploadFile, File, Request
 from fastapi.responses import RedirectResponse
 from fastapi.templating import Jinja2Templates
-from sqlalchemy.orm import Session
-from app.database import get_db
-from app.models import Product, Order, Testimonial, ContactMessage, User, OrderStatus
-from app.auth import hash_password, verify_password, create_access_token, get_current_user
+from app.supabase_db import get_all, get_one, insert, update, delete
+from app.auth import verify_password, create_access_token, get_current_user
 from app.storage_utils import subir_imagen
-from app.schemas import ProductUpdate
 import os
 
 router = APIRouter(prefix='/admin', tags=['admin'])
 templates = Jinja2Templates(directory=os.path.join(os.path.dirname(__file__), 'templates'))
 
 
-def login_required(request: Request, db: Session = Depends(get_db)):
-    token = request.cookies.get('token')
-    if not token:
-        raise HTTPException(status_code=303, detail='Not authenticated')
-    from jose import JWTError, jwt
-    from app.config import SECRET_KEY, ALGORITHM
-    try:
-        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
-        username = payload.get('sub')
-        user = db.query(User).filter(User.username == username).first()
-        if not user:
-            raise HTTPException(status_code=303, detail='User not found')
-        return user
-    except JWTError:
-        raise HTTPException(status_code=303, detail='Invalid token')
+def login_required(request: Request):
+    return get_current_user(request)
 
 
 @router.get('/login')
@@ -36,31 +20,28 @@ def login_form(request: Request):
 
 
 @router.post('/api/login')
-def login(
-    username: str = Form(...),
-    password: str = Form(...),
-    db: Session = Depends(get_db),
-):
-    user = db.query(User).filter(User.username == username).first()
-    if not user or not verify_password(password, user.hashed_password):
+def login(username: str = Form(...), password: str = Form(...)):
+    user = get_one('users', {'username': f'eq.{username}'})
+    if not user or not verify_password(password, user['hashed_password']):
         raise HTTPException(status_code=401, detail='Invalid credentials')
-    token = create_access_token({'sub': user.username})
-    return {'token': token, 'username': user.username}
+    token = create_access_token({'sub': user['username']})
+    return {'token': token, 'username': user['username']}
 
 
 @router.get('/dashboard')
-def dashboard(
-    request: Request,
-    db: Session = Depends(get_db),
-    _=Depends(login_required),
-):
+def dashboard(request: Request, _=Depends(login_required)):
+    products = get_all('products', {'select': 'id'})
+    orders = get_all('orders', {'select': 'id'})
+    testimonials = get_all('testimonials', {'select': 'id'})
+    unread = get_all('contact_messages', {'select': 'id', 'read': 'eq.false'})
+    recent_orders = get_all('orders', {'select': '*', 'order': 'created_at.desc', 'limit': '5'})
+
     stats = {
-        'products': db.query(Product).count(),
-        'orders': db.query(Order).count(),
-        'testimonials': db.query(Testimonial).count(),
-        'messages': db.query(ContactMessage).filter(ContactMessage.read == False).count(),
+        'products': len(products),
+        'orders': len(orders),
+        'testimonials': len(testimonials),
+        'messages': len(unread),
     }
-    recent_orders = db.query(Order).order_by(Order.created_at.desc()).limit(5).all()
     return templates.TemplateResponse('dashboard.html', {
         'request': request,
         'stats': stats,
@@ -68,23 +49,14 @@ def dashboard(
     })
 
 
-# ─── Products ───
-
 @router.get('/products')
-def list_products_admin(
-    request: Request,
-    db: Session = Depends(get_db),
-    _=Depends(login_required),
-):
-    products = db.query(Product).order_by(Product.created_at.desc()).all()
+def list_products_admin(request: Request, _=Depends(login_required)):
+    products = get_all('products', {'select': '*', 'order': 'created_at.desc'})
     return templates.TemplateResponse('products.html', {'request': request, 'products': products})
 
 
 @router.get('/products/new')
-def product_form(
-    request: Request,
-    _=Depends(login_required),
-):
+def product_form(request: Request, _=Depends(login_required)):
     return templates.TemplateResponse('product_form.html', {'request': request})
 
 
@@ -97,20 +69,17 @@ def create_product(
     price: float = Form(...),
     sizes: str = Form(''),
     colors: str = Form(''),
-    db: Session = Depends(get_db),
     _=Depends(login_required),
 ):
-    product = Product(
-        name=name,
-        description=description,
-        category=category,
-        price=price,
-        sizes=[s.strip() for s in sizes.split(',') if s.strip()],
-        colors=[c.strip() for c in colors.split(',') if c.strip()],
-        images=[],
-    )
-    db.add(product)
-    db.commit()
+    insert('products', {
+        'name': name,
+        'description': description,
+        'category': category,
+        'price': price,
+        'sizes': [s.strip() for s in sizes.split(',') if s.strip()],
+        'colors': [c.strip() for c in colors.split(',') if c.strip()],
+        'images': [],
+    })
     return RedirectResponse(url='/admin/products', status_code=303)
 
 
@@ -118,17 +87,15 @@ def create_product(
 def upload_product_image(
     product_id: int,
     file: UploadFile = File(...),
-    db: Session = Depends(get_db),
     _=Depends(login_required),
 ):
-    product = db.query(Product).filter(Product.id == product_id).first()
+    product = get_one('products', {'id': f'eq.{product_id}'})
     if not product:
         raise HTTPException(status_code=404, detail='Product not found')
     url = subir_imagen(file)
-    images = list(product.images or [])
+    images = list(product.get('images') or [])
     images.append(url)
-    product.images = images
-    db.commit()
+    update('products', product_id, {'images': images})
     return {'url': url}
 
 
@@ -136,10 +103,9 @@ def upload_product_image(
 def edit_product_form(
     request: Request,
     product_id: int,
-    db: Session = Depends(get_db),
     _=Depends(login_required),
 ):
-    product = db.query(Product).filter(Product.id == product_id).first()
+    product = get_one('products', {'id': f'eq.{product_id}'})
     if not product:
         raise HTTPException(status_code=404, detail='Product not found')
     return templates.TemplateResponse('product_form.html', {'request': request, 'product': product})
@@ -155,49 +121,39 @@ def update_product(
     price: float = Form(...),
     sizes: str = Form(''),
     colors: str = Form(''),
-    db: Session = Depends(get_db),
     _=Depends(login_required),
 ):
-    product = db.query(Product).filter(Product.id == product_id).first()
+    product = get_one('products', {'id': f'eq.{product_id}'})
     if not product:
         raise HTTPException(status_code=404, detail='Product not found')
-    product.name = name
-    product.description = description
-    product.category = category
-    product.price = price
-    product.sizes = [s.strip() for s in sizes.split(',') if s.strip()]
-    product.colors = [c.strip() for c in colors.split(',') if c.strip()]
-    db.commit()
+    update('products', product_id, {
+        'name': name,
+        'description': description,
+        'category': category,
+        'price': price,
+        'sizes': [s.strip() for s in sizes.split(',') if s.strip()],
+        'colors': [c.strip() for c in colors.split(',') if c.strip()],
+    })
     return RedirectResponse(url='/admin/products', status_code=303)
 
 
 @router.post('/products/{product_id}/toggle')
-def toggle_product(product_id: int, db: Session = Depends(get_db), _=Depends(login_required)):
-    product = db.query(Product).filter(Product.id == product_id).first()
+def toggle_product(product_id: int, _=Depends(login_required)):
+    product = get_one('products', {'id': f'eq.{product_id}'})
     if product:
-        product.active = not product.active
-        db.commit()
+        update('products', product_id, {'active': not product.get('active', True)})
     return RedirectResponse(url='/admin/products', status_code=303)
 
 
 @router.post('/products/{product_id}/delete')
-def delete_product(product_id: int, db: Session = Depends(get_db), _=Depends(login_required)):
-    product = db.query(Product).filter(Product.id == product_id).first()
-    if product:
-        db.delete(product)
-        db.commit()
+def delete_product(product_id: int, _=Depends(login_required)):
+    delete('products', product_id)
     return RedirectResponse(url='/admin/products', status_code=303)
 
 
-# ─── Orders ───
-
 @router.get('/orders')
-def list_orders_admin(
-    request: Request,
-    db: Session = Depends(get_db),
-    _=Depends(login_required),
-):
-    orders = db.query(Order).order_by(Order.created_at.desc()).all()
+def list_orders_admin(request: Request, _=Depends(login_required)):
+    orders = get_all('orders', {'select': '*', 'order': 'created_at.desc'})
     return templates.TemplateResponse('orders.html', {'request': request, 'orders': orders})
 
 
@@ -205,80 +161,68 @@ def list_orders_admin(
 def update_order_status(
     order_id: int,
     status_val: str = Form(...),
-    db: Session = Depends(get_db),
     _=Depends(login_required),
 ):
-    order = db.query(Order).filter(Order.id == order_id).first()
-    if order:
-        order.status = OrderStatus(status_val)
-        db.commit()
+    update('orders', order_id, {'status': status_val})
     return RedirectResponse(url='/admin/orders', status_code=303)
 
 
 @router.post('/orders/{order_id}/delete')
-def delete_order(order_id: int, db: Session = Depends(get_db), _=Depends(login_required)):
-    order = db.query(Order).filter(Order.id == order_id).first()
-    if order:
-        db.delete(order)
-        db.commit()
+def delete_order(order_id: int, _=Depends(login_required)):
+    delete('orders', order_id)
     return RedirectResponse(url='/admin/orders', status_code=303)
 
 
-# ─── Testimonials ───
-
 @router.get('/testimonials')
-def list_testimonials_admin(
-    request: Request,
-    db: Session = Depends(get_db),
-    _=Depends(login_required),
-):
-    testimonials = db.query(Testimonial).order_by(Testimonial.created_at.desc()).all()
+def list_testimonials_admin(request: Request, _=Depends(login_required)):
+    testimonials = get_all('testimonials', {'select': '*', 'order': 'created_at.desc'})
     return templates.TemplateResponse('testimonials_admin.html', {'request': request, 'testimonials': testimonials})
 
 
 @router.post('/testimonials/{testimonial_id}/toggle')
-def toggle_testimonial(testimonial_id: int, db: Session = Depends(get_db), _=Depends(login_required)):
-    t = db.query(Testimonial).filter(Testimonial.id == testimonial_id).first()
+def toggle_testimonial(testimonial_id: int, _=Depends(login_required)):
+    t = get_one('testimonials', {'id': f'eq.{testimonial_id}'})
     if t:
-        t.active = not t.active
-        db.commit()
+        update('testimonials', testimonial_id, {'active': not t.get('active', False)})
     return RedirectResponse(url='/admin/testimonials', status_code=303)
 
 
 @router.post('/testimonials/{testimonial_id}/delete')
-def delete_testimonial(testimonial_id: int, db: Session = Depends(get_db), _=Depends(login_required)):
-    t = db.query(Testimonial).filter(Testimonial.id == testimonial_id).first()
-    if t:
-        db.delete(t)
-        db.commit()
+def delete_testimonial(testimonial_id: int, _=Depends(login_required)):
+    delete('testimonials', testimonial_id)
     return RedirectResponse(url='/admin/testimonials', status_code=303)
 
 
-# ─── Messages ───
-
 @router.get('/messages')
-def list_messages_admin(
-    request: Request,
-    db: Session = Depends(get_db),
-    _=Depends(login_required),
-):
-    messages = db.query(ContactMessage).order_by(ContactMessage.created_at.desc()).all()
+def list_messages_admin(request: Request, _=Depends(login_required)):
+    messages = get_all('contact_messages', {'select': '*', 'order': 'created_at.desc'})
     return templates.TemplateResponse('messages.html', {'request': request, 'messages': messages})
 
 
 @router.post('/messages/{message_id}/read')
-def toggle_message_read(message_id: int, db: Session = Depends(get_db), _=Depends(login_required)):
-    msg = db.query(ContactMessage).filter(ContactMessage.id == message_id).first()
+def toggle_message_read(message_id: int, _=Depends(login_required)):
+    msg = get_one('contact_messages', {'id': f'eq.{message_id}'})
     if msg:
-        msg.read = not msg.read
-        db.commit()
+        update('contact_messages', message_id, {'read': not msg.get('read', False)})
     return RedirectResponse(url='/admin/messages', status_code=303)
 
 
 @router.post('/messages/{message_id}/delete')
-def delete_message(message_id: int, db: Session = Depends(get_db), _=Depends(login_required)):
-    msg = db.query(ContactMessage).filter(ContactMessage.id == message_id).first()
-    if msg:
-        db.delete(msg)
-        db.commit()
+def delete_message(message_id: int, _=Depends(login_required)):
+    delete('contact_messages', message_id)
     return RedirectResponse(url='/admin/messages', status_code=303)
+
+
+@router.get('/api/setup')
+def setup_admin():
+    from app.supabase_db import insert
+    from app.auth import hash_password
+    existing = get_one('users', {'username': 'eq.admin'})
+    if existing:
+        return {'message': 'Admin already exists'}
+    insert('users', {
+        'username': 'admin',
+        'hashed_password': hash_password('admin123'),
+        'is_admin': True,
+    })
+    return {'message': 'Admin created — user: admin, pass: admin123'}

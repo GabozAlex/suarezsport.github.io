@@ -1,12 +1,13 @@
-from fastapi import APIRouter, Depends
-from sqlalchemy.orm import Session
-from app.database import get_db
-from app.models import Testimonial
-from app.schemas import TestimonialOut
+from fastapi import APIRouter
+from app.supabase_db import get_all
 
 router = APIRouter(prefix='/api/testimonials', tags=['testimonials'])
 
 
-@router.get('', response_model=list[TestimonialOut])
-def list_testimonials(db: Session = Depends(get_db)):
-    return db.query(Testimonial).filter(Testimonial.active == True).order_by(Testimonial.created_at.desc()).all()
+@router.get('')
+def list_testimonials():
+    return get_all('testimonials', {
+        'select': '*',
+        'active': 'eq.true',
+        'order': 'created_at.desc',
+    })

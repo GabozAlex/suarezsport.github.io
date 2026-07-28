@@ -1,15 +1,12 @@
 from datetime import datetime, timedelta, timezone
 from jose import JWTError, jwt
 from passlib.context import CryptContext
-from fastapi import Depends, HTTPException, status
-from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
-from sqlalchemy.orm import Session
+from fastapi import HTTPException, status
+from fastapi.requests import Request
 from app.config import SECRET_KEY, ALGORITHM, ACCESS_TOKEN_EXPIRE_MINUTES
-from app.database import get_db
-from app.models import User
+from app.supabase_db import get_one
 
 pwd_context = CryptContext(schemes=['bcrypt'])
-security = HTTPBearer(auto_error=False)
 
 
 def hash_password(password: str) -> str:
@@ -27,21 +24,18 @@ def create_access_token(data: dict) -> str:
     return jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
 
 
-def get_current_user(
-    credentials: HTTPAuthorizationCredentials = Depends(security),
-    db: Session = Depends(get_db),
-) -> User:
-    if credentials is None:
+def get_current_user(request: Request):
+    token = request.cookies.get('token')
+    if not token:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail='Not authenticated')
-    token = credentials.credentials
     try:
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
         username = payload.get('sub')
-        if username is None:
+        if not username:
             raise HTTPException(status_code=401, detail='Invalid token')
+        user = get_one('users', {'username': f'eq.{username}'})
+        if not user:
+            raise HTTPException(status_code=401, detail='User not found')
+        return user
     except JWTError:
         raise HTTPException(status_code=401, detail='Invalid token')
-    user = db.query(User).filter(User.username == username).first()
-    if user is None:
-        raise HTTPException(status_code=401, detail='User not found')
-    return user

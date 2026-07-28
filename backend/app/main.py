@@ -1,13 +1,9 @@
-from fastapi import FastAPI, Request
+from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import RedirectResponse
-from fastapi.templating import Jinja2Templates
-from app.database import engine, Base
 from app.routers import products, testimonials, orders, contact
 from app.admin.router import router as admin_router
 import os
-
-Base.metadata.create_all(bind=engine)
 
 app = FastAPI(title='Suarez Sport API', docs_url='/docs')
 

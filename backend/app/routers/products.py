@@ -1,30 +1,22 @@
-from fastapi import APIRouter, Depends, Query
-from sqlalchemy.orm import Session
-from app.database import get_db
-from app.models import Product
-from app.schemas import ProductOut
+from fastapi import APIRouter, HTTPException, status
+from app.supabase_db import get_all, get_one
 
 router = APIRouter(prefix='/api/products', tags=['products'])
 
 
-@router.get('', response_model=list[ProductOut])
-def list_products(
-    category: str = Query(None),
-    search: str = Query(None),
-    db: Session = Depends(get_db),
-):
-    q = db.query(Product).filter(Product.active == True)
+@router.get('')
+def list_products(category: str = None, search: str = None):
+    params = {'select': '*', 'active': 'eq.true', 'order': 'created_at.desc'}
     if category:
-        q = q.filter(Product.category == category)
+        params['category'] = f'eq.{category}'
     if search:
-        q = q.filter(Product.name.ilike(f'%{search}%'))
-    return q.order_by(Product.created_at.desc()).all()
+        params['name'] = f'ilike.%{search}%'
+    return get_all('products', params)
 
 
-@router.get('/{product_id}', response_model=ProductOut)
-def get_product(product_id: int, db: Session = Depends(get_db)):
-    product = db.query(Product).filter(Product.id == product_id, Product.active == True).first()
-    if not product:
-        from fastapi import HTTPException, status
+@router.get('/{product_id}')
+def get_product(product_id: int):
+    product = get_one('products', product_id)
+    if not product or not product.get('active'):
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail='Product not found')
     return product

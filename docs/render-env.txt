@@ -3,20 +3,17 @@ VARIABLES DE ENTORNO PARA RENDER
 
 Web Service → Environment → Add Environment Variable
 
-1. DATABASE_URL
-   postgresql://postgres:59BEahwNBtwlcX1t@db.firlktvccqsycubwpxqo.supabase.co:6543/postgres?sslmode=require
-
-2. SECRET_KEY
+1. SECRET_KEY
    (genera una clave segura, ej: openssl rand -hex 32)
    suarezsport-secret-key-2026-prod-change
 
-3. SUPABASE_URL
+2. SUPABASE_URL
    https://firlktvccqsycubwpxqo.supabase.co
 
-4. SUPABASE_SERVICE_KEY
+3. SUPABASE_SERVICE_KEY
    eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZpcmxrdHZjY3FzeWN1YndweHFvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc4NTI1MjI3NSwiZXhwIjoyMTAwODI4Mjc1fQ.9Gdh1wyz-ZvNEdha1wU8Q8L4EybxxiDUeV7FgR5yaTY
 
-5. SUPABASE_BUCKET
+4. SUPABASE_BUCKET
    productos
 
 
@@ -34,8 +31,9 @@ En Render → New Web Service → Settings:
 4. HTTP Port: 8000  ← esto va en el campo "HTTP Port" de Render, NO en el Start Command
 
 
-CREAR USUARIO ADMIN (después del deploy)
-=========================================
-Render Console → Shell → pegar:
-
-python -m app.create_admin admin <tu-contraseña>
+ANTES DEL DEPLOY EN RENDER
+===========================
+1. Ve a tu dashboard de Supabase → SQL Editor
+2. Pega el contenido de backend/supabase_schema.sql y ejecútalo
+3. Luego ve a: https://<tu-app>.onrender.com/admin/api/setup
+   (esto crea el admin: usuario admin, contraseña admin123)
