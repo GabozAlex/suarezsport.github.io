@@ -816,7 +816,7 @@ header h1 {
 
 /* ============ FOOTER ============ */
 footer {
-    background-color: #0a0a0a;
+    background: #0a0a0a;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -833,43 +833,58 @@ footer {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    padding: 20px;
+    padding: 30px 20px;
     color: white;
     flex: 1;
     min-width: 250px;
+    border: 1px solid rgba(255,255,255,0.04);
+    border-radius: 16px;
+    background: rgba(255,255,255,0.02);
 }
 
 .redes h2, .contactame h2 {
-    font-size: 1.3rem;
-    font-weight: 700;
-    margin-bottom: 15px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 18px;
+    color: rgba(255,255,255,0.6);
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 .redes ul, .contactame ul {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
+    list-style: none;
 }
 
-.redes ul li a img, .contactame ul li a img {
-    width: 45px;
-    height: 45px;
-    background-color: rgba(250, 250, 250, 0.1);
+.redes ul li a, .contactame ul li a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 46px;
+    height: 46px;
     border-radius: 50%;
-    padding: 8px;
-    transition: transform 0.3s ease, background-color 0.3s ease;
+    background: rgba(255,255,255,0.06);
+    color: rgba(255,255,255,0.7);
+    transition: transform 0.3s ease, background 0.3s ease, color 0.3s ease;
 }
 
-.redes ul li a img:hover, .contactame ul li a img:hover {
-    transform: scale(1.15);
-    background-color: #ff6600;
+.redes ul li a:hover, .contactame ul li a:hover {
+    transform: translateY(-3px) scale(1.1);
 }
+
+.icon-facebook:hover { background: #1877f2; color: white; }
+.icon-instagram:hover { background: #e4405f; color: white; }
+.icon-whatsapp:hover { background: #25d366; color: white; }
+.icon-github:hover { background: #333; color: white; }
+.icon-web:hover { background: #ff6600; color: white; }
 
 .redes p, .contactame p {
     color: #aaaaaa;
-    margin-top: 8px;
-    font-size: 0.9rem;
+    margin-top: 12px;
+    font-size: 0.85rem;
 }
 
 footer > p {
