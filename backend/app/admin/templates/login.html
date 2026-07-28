@@ -21,8 +21,6 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
   try {
     const res = await fetch('/admin/api/login', { method: 'POST', body: form });
     if (!res.ok) throw new Error('Credenciales inválidas');
-    const data = await res.json();
-    document.cookie = `token=${data.token}; path=/; max-age=28800; SameSite=Lax`;
     window.location.href = '/admin/dashboard';
   } catch (err) {
     document.getElementById('loginError').textContent = 'Usuario o contraseña incorrectos';

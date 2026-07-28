@@ -86,24 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    async function cargarProductos() {
-        try {
-            const res = await fetch(`${API_URL}/api/products`);
-            if (res.ok) {
-                const apiProducts = await res.json();
-                if (Array.isArray(apiProducts) && apiProducts.length > 0) {
-                    window.productos = apiProducts.map(p => ({
-                        id: p.id,
-                        nombre: p.name,
-                        categoria: p.category,
-                        precio: p.price,
-                        imagen: Array.isArray(p.images) && p.images.length > 0 ? p.images[0] : '',
-                        tallas: p.sizes || [],
-                        colores: p.colors || [],
-                    }));
-                }
-            }
-        } catch {}
+    function cargarProductos() {
         mostrarSkeletonCatalog();
         setTimeout(() => {
             PAGINAS['todas'] = 1;
@@ -571,11 +554,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     /* ============ FORM HANDLING ============ */
     const form = document.querySelector('.contacto form');
-    const feedback = document.createElement('p');
-    feedback.className = 'form-feedback';
-    form.appendChild(feedback);
-
     if (form) {
+        const feedback = document.createElement('p');
+        feedback.className = 'form-feedback';
+        form.appendChild(feedback);
         form.addEventListener('submit', (e) => {
             e.preventDefault();
 

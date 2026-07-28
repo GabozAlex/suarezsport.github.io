@@ -1,9 +1,10 @@
 from fastapi import APIRouter, Depends, HTTPException, status, Form, UploadFile, File, Request
-from fastapi.responses import RedirectResponse
+from fastapi.responses import RedirectResponse, JSONResponse
 from fastapi.templating import Jinja2Templates
 from app.supabase_db import get_all, get_one, insert, update, delete
 from app.auth import verify_password, create_access_token, get_current_user
 from app.storage_utils import subir_imagen
+from app.config import ACCESS_TOKEN_EXPIRE_MINUTES
 import os
 
 router = APIRouter(prefix='/admin', tags=['admin'])
@@ -25,7 +26,16 @@ def login(username: str = Form(...), password: str = Form(...)):
     if not user or not verify_password(password, user['hashed_password']):
         raise HTTPException(status_code=401, detail='Invalid credentials')
     token = create_access_token({'sub': user['username']})
-    return {'token': token, 'username': user['username']}
+    resp = JSONResponse({'token': token, 'username': user['username']})
+    resp.set_cookie(
+        key='token',
+        value=token,
+        max_age=ACCESS_TOKEN_EXPIRE_MINUTES * 60,
+        httponly=True,
+        samesite='lax',
+        secure=False,
+    )
+    return resp
 
 
 @router.get('/dashboard')

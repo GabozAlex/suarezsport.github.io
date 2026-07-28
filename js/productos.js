@@ -57,7 +57,7 @@ const productos = [
   { id: 45, nombre: 'Uniforme Fútbol Personalizado', categoria: 'uniformes', precio: 45, imagen: 'imagenes/uniformes/uniforme2.PNG', tallas: ['S', 'M', 'L', 'XL'], colores: ['Blanco', 'Rojo', 'Negro'] },
   { id: 46, nombre: 'Uniforme Baloncesto', categoria: 'uniformes', precio: 38, imagen: 'imagenes/uniformes/uniforme3.PNG', tallas: ['S', 'M', 'L', 'XL'], colores: ['Azul', 'Blanco', 'Negro'] },
   { id: 47, nombre: 'Uniforme Baloncesto Personalizado', categoria: 'uniformes', precio: 48, imagen: 'imagenes/uniformes/uniforme4.PNG', tallas: ['S', 'M', 'L', 'XL'], colores: ['Rojo', 'Negro', 'Blanco'] },
-  { id: 48, nombre: 'Uniforme Béisbol', categoria: 'uniformes', precio: 40, imagen: 'imagenes/uniformes/uniforme5.PNG', tallas: ['S', 'M', 'L', 'XL'], colores: ['Blanco', 'Gris', 'Azul'] },
+  { id: 48, nombre: 'Uniforme Béisbol', categoria: 'uniformes', precio: 40, imagen: 'imagenes/uniformes/uniforme5.png', tallas: ['S', 'M', 'L', 'XL'], colores: ['Blanco', 'Gris', 'Azul'] },
   { id: 49, nombre: 'Uniforme Béisbol Personalizado', categoria: 'uniformes', precio: 50, imagen: 'imagenes/uniformes/uniforme6.PNG', tallas: ['S', 'M', 'L', 'XL'], colores: ['Gris', 'Blanco', 'Negro'] },
   { id: 50, nombre: 'Uniforme Voleibol', categoria: 'uniformes', precio: 35, imagen: 'imagenes/uniformes/uniforme7.PNG', tallas: ['S', 'M', 'L', 'XL'], colores: ['Azul', 'Blanco', 'Rojo'] },
   { id: 51, nombre: 'Uniforme Voleibol Personalizado', categoria: 'uniformes', precio: 45, imagen: 'imagenes/uniformes/uniforme8.PNG', tallas: ['S', 'M', 'L', 'XL'], colores: ['Rojo', 'Blanco', 'Negro'] },

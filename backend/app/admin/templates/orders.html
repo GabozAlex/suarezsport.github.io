@@ -13,7 +13,7 @@
       <td>{{ order.customer_name }}</td>
       <td>{{ order.phone }}</td>
       <td style="max-width:200px;overflow:hidden;text-overflow:ellipsis;">{{ order.address }}</td>
-      <td>{{ (order.items or [])|length }} items</td>
+      <td>{{ (order.get('items') or [])|length }} items</td>
       <td>${{ order.total }}</td>
       <td>
         <form method="post" action="/admin/orders/{{ order.id }}/status">

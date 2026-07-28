@@ -606,54 +606,6 @@ header h1 {
     box-shadow: 0 6px 20px rgba(255, 102, 0, 0.4);
 }
 
-/* ============ TESTIMONIAL / ACTIONS ============ */
-.actions {
-    background-image: url('../imagenes/presentacion/presentacion3.webp');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    min-height: 500px;
-    color: white;
-    position: relative;
-    padding: 80px 5%;
-    text-align: center;
-}
-
-.actions::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.4) 100%);
-}
-
-.actions h2 {
-    position: relative;
-    font-size: clamp(1.8rem, 3vw, 2.5rem);
-    font-weight: 800;
-    margin-bottom: 20px;
-}
-
-.actions p {
-    position: relative;
-    max-width: 700px;
-    font-size: clamp(1rem, 2vw, 1.3rem);
-    line-height: 1.7;
-    font-style: italic;
-    opacity: 0.95;
-}
-
-.actions p::before {
-    content: '\201C';
-    font-size: 3rem;
-    color: #ff6600;
-    display: block;
-    margin-bottom: 10px;
-}
-
 /* ============ FAQ ============ */
 .faq {
     background-color: #111111;
@@ -941,7 +893,7 @@ footer > p {
 .back-to-top {
     position: fixed;
     bottom: 30px;
-    right: 30px;
+    left: 30px;
     width: 50px;
     height: 50px;
     background-color: #ff6600;
@@ -1811,14 +1763,6 @@ footer > p {
     .card {
         width: 100%;
         max-width: 400px;
-    }
-
-    .actions {
-        background-attachment: scroll;
-    }
-
-    .actions p {
-        max-width: 100%;
     }
 
     .ubicacion {
