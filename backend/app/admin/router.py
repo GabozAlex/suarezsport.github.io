@@ -35,6 +35,9 @@ def dashboard(request: Request, _=Depends(login_required)):
     testimonials = get_all('testimonials', {'select': 'id'})
     unread = get_all('contact_messages', {'select': 'id', 'read': 'eq.false'})
     recent_orders = get_all('orders', {'select': '*', 'order': 'created_at.desc', 'limit': '5'})
+    for o in recent_orders:
+        if o.get('created_at') is None:
+            o['created_at'] = ''
 
     stats = {
         'products': len(products),
@@ -177,6 +180,11 @@ def delete_product(product_id: int, _=Depends(login_required)):
 @router.get('/orders')
 def list_orders_admin(request: Request, _=Depends(login_required)):
     orders = get_all('orders', {'select': '*', 'order': 'created_at.desc'})
+    for o in orders:
+        if not isinstance(o.get('items'), list):
+            o['items'] = []
+        if o.get('created_at') is None:
+            o['created_at'] = ''
     return templates.TemplateResponse('orders.html', {'request': request, 'orders': orders})
 
 
@@ -237,6 +245,9 @@ def delete_testimonial(testimonial_id: int, _=Depends(login_required)):
 @router.get('/messages')
 def list_messages_admin(request: Request, _=Depends(login_required)):
     messages = get_all('contact_messages', {'select': '*', 'order': 'created_at.desc'})
+    for m in messages:
+        if m.get('created_at') is None:
+            m['created_at'] = ''
     return templates.TemplateResponse('messages.html', {'request': request, 'messages': messages})
 
 
