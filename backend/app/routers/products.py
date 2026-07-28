@@ -16,7 +16,7 @@ def list_products(category: str = None, search: str = None):
 
 @router.get('/{product_id}')
 def get_product(product_id: int):
-    product = get_one('products', product_id)
+    product = get_one('products', {'id': f'eq.{product_id}'})
     if not product or not product.get('active'):
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail='Product not found')
     return product
