@@ -2,123 +2,83 @@
   "testimonios": [
     {
       "id": 1,
-      "nombre": "Zoe Harris",
-      "edad": 28,
-      "ciudad": "Madrid",
-      "producto": "Equipo de fútbol personalizado",
-      "opinion": "Gracias a Suarez Sport, pude personalizar mi equipo deportivo con facilidad y el resultado fue espectacular. La calidad de la ropa es insuperable.",
-      "valoracion": 5,
-      "fecha": "2024-03-15"
+      "nombre": "Carlos Marcano",
+      "ciudad": "Porlamar",
+      "producto": "Uniforme de fútbol personalizado",
+      "opinion": "Mandé a hacer los uniformes para todo el equipo y quedaron espectaculares. La sublimación de primera, los colores bien vibrantes. Recomendados totalmente.",
+      "valoracion": 5
     },
     {
       "id": 2,
-      "nombre": "Ava Green",
-      "edad": 32,
-      "ciudad": "Barcelona",
-      "producto": "Ropa deportiva personalizada",
-      "opinion": "Suarez Sport me permitió personalizar mi ropa deportiva de manera sencilla y rápida. Los materiales son de excelente calidad, y el servicio al cliente fue excepcional. Definitivamente volveré a comprar.",
-      "valoracion": 5,
-      "fecha": "2024-02-28"
+      "nombre": "María Velásquez",
+      "ciudad": "La Asunción",
+      "producto": "Conjunto deportivo",
+      "opinion": "Pedí un conjunto para entrenar y me encantó. La tela es súper fresca, ideal para el calor de la isla. El delivery llegó rapidísimo a mi casa.",
+      "valoracion": 5
     },
     {
       "id": 3,
-      "nombre": "Carlos Rodríguez",
-      "edad": 25,
-      "ciudad": "Valencia",
-      "producto": "Uniforme de baloncesto",
-      "opinion": "Increíble experiencia con Suarez Sport. El proceso de personalización fue intuitivo y el producto final superó todas mis expectativas. La entrega fue puntual y la calidad premium.",
-      "valoracion": 5,
-      "fecha": "2024-03-10"
+      "nombre": "José Marcano",
+      "ciudad": "Pampatar",
+      "producto": "Camisa personalizada",
+      "opinion": "Mandé a personalizar unas camisas para mi negocio y el trabajo quedó impecable. Los detalles bien cuidados y la atención excelente. Volveré a pedir sin duda.",
+      "valoracion": 5
     },
     {
       "id": 4,
-      "nombre": "Maya Patel",
-      "edad": 29,
-      "ciudad": "Sevilla",
-      "producto": "Uniforme deportivo",
-      "opinion": "¡Quedé encantada! Diseñar mi uniforme deportivo fue muy divertido y fácil en su plataforma. La tela es muy cómoda y transpirable, perfecta para el alto rendimiento. ¡Recomendado 100%!",
-      "valoracion": 5,
-      "fecha": "2024-03-05"
+      "nombre": "Andreína Gil",
+      "ciudad": "Juango",
+      "producto": "Short y top deportivo",
+      "opinion": "Me hice un conjunto short-top para el gym y me quedó perfecto. La tela es de buena calidad y la personalización quedó tal cual lo pedí por WhatsApp. Súper recomendadas.",
+      "valoracion": 5
     },
     {
       "id": 5,
-      "nombre": "Liam Johnson",
-      "edad": 35,
-      "ciudad": "Bilbao",
-      "producto": "Chamarra personalizada",
-      "opinion": "Suarez Sport es mi nueva tienda favorita. El servicio al cliente resolvió todas mis dudas rápidamente. La chamarra personalizada que encargué es de la mejor calidad que he visto. Un acierto total.",
-      "valoracion": 5,
-      "fecha": "2024-02-20"
+      "nombre": "Luis Salazar",
+      "ciudad": "El Valle",
+      "producto": "Uniforme de béisbol",
+      "opinion": "Pedimos los uniformes para el equipo de béisbol infantil y todos quedaron felices. Buenos materiales, bien cosidos y los números y nombres quedaron perfectos. Excelente.",
+      "valoracion": 5
     },
     {
       "id": 6,
-      "nombre": "Sofía Martínez",
-      "edad": 26,
-      "ciudad": "Málaga",
-      "producto": "Equipo de ciclismo",
-      "opinion": "Excelente servicio y calidad. El diseño personalizado quedó exactamente como lo quería. El material es resistente y muy cómodo para largas jornadas de entrenamiento.",
-      "valoracion": 5,
-      "fecha": "2024-03-12"
+      "nombre": "Rosmary Guzmán",
+      "ciudad": "Punta de Piedras",
+      "producto": "Suéter personalizado",
+      "opinion": "Encargué un suéter con un diseño especial y me llegó antes de lo esperado. La calidad es buenísima, no ha perdido el color después de varios lavados. Muy contenta.",
+      "valoracion": 5
     },
     {
       "id": 7,
-      "nombre": "Daniel Kim",
-      "edad": 31,
-      "ciudad": "Zaragoza",
-      "producto": "Uniforme de running",
-      "opinion": "La personalización fue extremadamente detallada. Pudieron plasmar todos los logos de mi equipo perfectamente. La calidad del tejido es superior a otras marcas que he probado.",
-      "valoracion": 5,
-      "fecha": "2024-02-25"
+      "nombre": "Jesús Romero",
+      "ciudad": "Los Robles",
+      "producto": "Shorts de entrenamiento",
+      "opinion": "Buenísimos los shorts, frescos y cómodos. Los uso para correr en la playa y aguantan bien el sol y la arena. Precio justo y buena atención.",
+      "valoracion": 5
     },
     {
       "id": 8,
-      "nombre": "Elena Torres",
-      "edad": 27,
-      "ciudad": "Murcia",
-      "producto": "Ropa de entrenamiento",
-      "opinion": "El proceso de compra fue muy sencillo y el resultado final impresionante. La ropa se adapta perfectamente al cuerpo y los colores se mantienen vibrantes incluso después de múltiples lavados.",
-      "valoracion": 5,
-      "fecha": "2024-03-08"
+      "nombre": "Yulianny León",
+      "ciudad": "Boca de Río",
+      "producto": "Conjunto deportivo personalizado",
+      "opinion": "Me encantó todo el proceso. Mandé las referencias por WhatsApp y en días tenía mi conjunto listo. Quedó idéntico a lo que quería. La mejor tienda de la isla.",
+      "valoracion": 5
     },
     {
       "id": 9,
-      "nombre": "Javier López",
-      "edad": 33,
-      "ciudad": "Granada",
-      "producto": "Equipo de fútbol sala",
-      "opinion": "Quedamos muy satisfechos con los uniformes de todo el equipo. El diseño quedó idéntico a lo que habíamos imaginado y la atención personalizada fue excepcional.",
-      "valoracion": 5,
-      "fecha": "2024-03-01"
+      "nombre": "Ángel Salazar",
+      "ciudad": "Paraguachí",
+      "producto": "Uniforme de fútbol sala",
+      "opinion": "Hice el pedido de los uniformes para el equipo del barrio y todos quedaron contentísimos. Buena calidad, buenos precios y el diseño quedó brutal. Full recomendados.",
+      "valoracion": 5
     },
     {
       "id": 10,
-      "nombre": "Olivia Chen",
-      "edad": 30,
-      "ciudad": "Palma de Mallorca",
-      "producto": "Ropa de yoga personalizada",
-      "opinion": "La calidad de la tela es extraordinaria, perfecta para yoga. El sistema de personalización es muy completo y me permitió crear un diseño único. Entrega rápida y bien empaquetada.",
-      "valoracion": 5,
-      "fecha": "2024-02-22"
-    },
-    {
-      "id": 11,
-      "nombre": "Miguel Ángel Ruiz",
-      "edad": 24,
-      "ciudad": "Alicante",
-      "producto": "Equipo de balonmano",
-      "opinion": "El mejor ratio calidad-precio del mercado. Los uniformes quedaron perfectos y han resistido perfectamente los entrenamientos intensivos. Volveremos a confiar en Suarez Sport.",
-      "valoracion": 5,
-      "fecha": "2024-03-18"
-    },
-    {
-      "id": 12,
-      "nombre": "Isabella Rossi",
-      "edad": 29,
-      "ciudad": "Tenerife",
-      "producto": "Ropa de natación personalizada",
-      "opinion": "El material es de alta calidad y resistente al cloro. Los colores son vibrantes y el diseño personalizado se ve profesional. Muy contenta con mi experiencia de compra.",
-      "valoracion": 5,
-      "fecha": "2024-03-03"
+      "nombre": "Génesis Mata",
+      "ciudad": "El Tirano",
+      "producto": "Accesorios personalizados",
+      "opinion": "Pedí gorras y mochilas con el logo de mi emprendimiento y el trabajo quedó súper profesional. La atención al cliente excelente, me asesoraron en todo. 10/10.",
+      "valoracion": 5
     }
   ]
 }
