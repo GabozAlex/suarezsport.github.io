@@ -20,7 +20,7 @@
           </button>
         </form>
       </td>
-      <td>{{ msg.created_at.strftime('%d/%m/%Y') }}</td>
+      <td>{{ msg.created_at[:10] }}</td>
       <td>
         <form method="post" action="/admin/messages/{{ msg.id }}/delete" onsubmit="return confirm('¿Eliminar mensaje?')" style="display:inline">
           <button class="btn btn-small btn-danger">Eliminar</button>

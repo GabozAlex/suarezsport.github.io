@@ -19,12 +19,12 @@
         <form method="post" action="/admin/orders/{{ order.id }}/status">
           <select name="status_val" onchange="this.form.submit()">
             {% for s in ['pendiente', 'confirmado', 'enviado', 'entregado'] %}
-            <option value="{{ s }}" {% if order.status.value == s %}selected{% endif %}>{{ s }}</option>
+            <option value="{{ s }}" {% if order.status == s %}selected{% endif %}>{{ s }}</option>
             {% endfor %}
           </select>
         </form>
       </td>
-      <td>{{ order.created_at.strftime('%d/%m/%Y') }}</td>
+      <td>{{ order.created_at[:10] }}</td>
       <td>
         <form method="post" action="/admin/orders/{{ order.id }}/delete" onsubmit="return confirm('¿Eliminar pedido?')" style="display:inline">
           <button class="btn btn-small btn-danger">Eliminar</button>

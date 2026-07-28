@@ -411,13 +411,15 @@ document.addEventListener('DOMContentLoaded', () => {
     function renderTestimonio(index) {
         const t = testimoniosData[index];
         if (!t) return;
+        const estrellas = '★'.repeat(t.rating || t.valoracion || 5) + '☆'.repeat(5 - (t.rating || t.valoracion || 5));
+        const ciudad = t.ciudad ? `${t.ciudad}, ` : '';
         track.innerHTML = `
             <div class="testimonio-card">
-                <div class="testimonio-estrellas">${'★'.repeat(t.valoracion)}${'☆'.repeat(5 - t.valoracion)}</div>
+                <div class="testimonio-estrellas">${estrellas}</div>
                 <p class="testimonio-texto">${t.opinion}</p>
                 <div class="testimonio-autor">
-                    <span class="testimonio-nombre">— ${t.nombre}</span>
-                    <span class="testimonio-ciudad">${t.ciudad}, ${t.producto}</span>
+                    <span class="testimonio-nombre">— ${t.name || t.nombre}</span>
+                    <span class="testimonio-ciudad">${ciudad}${t.product || t.producto}</span>
                 </div>
             </div>
         `;
@@ -469,6 +471,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     product: t.producto,
                     opinion: t.opinion,
                     rating: t.valoracion,
+                    ciudad: t.ciudad || '',
                 }));
             } catch {
                 testimoniosData = [];
