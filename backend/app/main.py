@@ -31,4 +31,11 @@ def logout():
 
 @app.get('/')
 def root():
-    return {'message': 'Suarez Sport API', 'docs': '/docs', 'admin': '/admin/login'}
+    from app.config import SUPABASE_URL, SUPABASE_SERVICE_KEY, SUPABASE_BUCKET
+    return {
+        'message': 'Suarez Sport API',
+        'docs': '/docs',
+        'admin': '/admin/login',
+        'supabase_configured': bool(SUPABASE_URL and SUPABASE_SERVICE_KEY),
+        'supabase_bucket': SUPABASE_BUCKET,
+    }

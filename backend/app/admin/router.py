@@ -215,14 +215,16 @@ def delete_message(message_id: int, _=Depends(login_required)):
 
 @router.get('/api/setup')
 def setup_admin():
-    from app.supabase_db import insert
     from app.auth import hash_password
-    existing = get_one('users', {'username': 'eq.admin'})
-    if existing:
-        return {'message': 'Admin already exists'}
-    insert('users', {
-        'username': 'admin',
-        'hashed_password': hash_password('admin123'),
-        'is_admin': True,
-    })
-    return {'message': 'Admin created — user: admin, pass: admin123'}
+    try:
+        existing = get_one('users', {'username': 'eq.admin'})
+        if existing:
+            return {'message': 'Admin already exists'}
+        insert('users', {
+            'username': 'admin',
+            'hashed_password': hash_password('admin123'),
+            'is_admin': True,
+        })
+        return {'message': 'Admin created — user: admin, pass: admin123'}
+    except Exception as e:
+        return {'error': str(e), 'type': type(e).__name__}
