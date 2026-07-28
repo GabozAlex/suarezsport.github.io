@@ -23,10 +23,15 @@ Web Service → Environment → Add Environment Variable
 CONFIGURACIÓN DEL WEB SERVICE
 ==============================
 
-- Root Directory: backend
-- Build Command: pip install -r requirements.txt
-- Start Command: uvicorn app.main:app --host 0.0.0.0 --port $PORT
-- HTTP Port: 8000
+En Render → New Web Service → Settings:
+
+1. Root Directory: backend
+
+2. Build Command: pip install -r requirements.txt
+
+3. Start Command: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+
+4. HTTP Port: 8000  ← esto va en el campo "HTTP Port" de Render, NO en el Start Command
 
 
 CREAR USUARIO ADMIN (después del deploy)
