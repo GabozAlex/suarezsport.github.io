@@ -1,20 +1,22 @@
+import hashlib
+import secrets
 from datetime import datetime, timedelta, timezone
 from jose import JWTError, jwt
-from passlib.context import CryptContext
 from fastapi import HTTPException, status
 from fastapi.requests import Request
 from app.config import SECRET_KEY, ALGORITHM, ACCESS_TOKEN_EXPIRE_MINUTES
 from app.supabase_db import get_one
 
-pwd_context = CryptContext(schemes=['bcrypt'])
-
 
 def hash_password(password: str) -> str:
-    return pwd_context.hash(password)
+    salt = secrets.token_hex(16)
+    h = hashlib.sha256((salt + password).encode()).hexdigest()
+    return f'{salt}${h}'
 
 
 def verify_password(plain: str, hashed: str) -> bool:
-    return pwd_context.verify(plain, hashed)
+    salt, h = hashed.split('$')
+    return hashlib.sha256((salt + plain).encode()).hexdigest() == h
 
 
 def create_access_token(data: dict) -> str:
