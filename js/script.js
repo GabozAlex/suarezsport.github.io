@@ -387,6 +387,10 @@ document.addEventListener('DOMContentLoaded', () => {
         btnEnviarPedido.textContent = 'Enviar pedido por WhatsApp';
     }
 
+    /* ============ HERO PRODUCT COUNT ============ */
+    const heroCount = document.querySelector('.hero-stats span:nth-child(2) strong');
+    if (heroCount) heroCount.textContent = productos.length;
+
     /* ============ INIT CART ============ */
     actualizarContador();
 
