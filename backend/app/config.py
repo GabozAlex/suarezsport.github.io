@@ -10,3 +10,6 @@ ACCESS_TOKEN_EXPIRE_MINUTES = 480
 SUPABASE_URL = os.getenv('SUPABASE_URL', '')
 SUPABASE_SERVICE_KEY = os.getenv('SUPABASE_SERVICE_KEY', '')
 SUPABASE_BUCKET = os.getenv('SUPABASE_BUCKET', 'productos')
+
+ADMIN_USER = os.getenv('ADMIN_USER', 'admin')
+ADMIN_PASS = os.getenv('ADMIN_PASS', 'admin123')

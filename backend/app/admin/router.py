@@ -4,7 +4,7 @@ from fastapi.templating import Jinja2Templates
 from app.supabase_db import get_all, get_one, insert, update, delete
 from app.auth import verify_password, create_access_token, get_current_user
 from app.storage_utils import subir_imagen
-from app.config import ACCESS_TOKEN_EXPIRE_MINUTES
+from app.config import ACCESS_TOKEN_EXPIRE_MINUTES, ADMIN_USER, ADMIN_PASS
 import os
 
 router = APIRouter(prefix='/admin', tags=['admin'])
@@ -283,10 +283,10 @@ def setup_admin():
         if existing:
             return {'message': 'Admin already exists'}
         insert('users', {
-            'username': 'admin',
-            'hashed_password': hash_password('admin123'),
+            'username': ADMIN_USER,
+            'hashed_password': hash_password(ADMIN_PASS),
             'is_admin': True,
         })
-        return {'message': 'Admin created — user: admin, pass: admin123'}
+        return {'message': f'Admin created — user: {ADMIN_USER}'}
     except Exception as e:
         return {'error': str(e), 'type': type(e).__name__}
