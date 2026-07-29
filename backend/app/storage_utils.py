@@ -24,4 +24,5 @@ def subir_imagen(file) -> str:
 
 def borrar_imagen(filename: str):
     delete_url = f'{SUPABASE_URL}/storage/v1/object/{SUPABASE_BUCKET}/{filename}'
-    requests.delete(delete_url, headers=_headers())
+    resp = requests.delete(delete_url, headers=_headers())
+    resp.raise_for_status()

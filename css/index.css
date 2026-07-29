@@ -761,6 +761,7 @@ header h1 {
     color: white;
     transition: border-color 0.3s ease, background-color 0.3s ease;
     font-family: inherit;
+    resize: vertical;
 }
 
 .contacto form input:focus,
@@ -1267,6 +1268,7 @@ footer > p {
     color: white;
     font-size: 0.95rem;
     font-family: inherit;
+    resize: vertical;
     outline: none;
     transition: border-color 0.3s ease;
 }
@@ -1548,7 +1550,6 @@ footer > p {
 
 .testimonios-track {
     display: flex;
-    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .testimonio-card {

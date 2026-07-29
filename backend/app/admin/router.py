@@ -4,7 +4,7 @@ from fastapi.templating import Jinja2Templates
 from app.supabase_db import get_all, get_one, insert, update, delete
 from app.auth import verify_password, create_access_token, get_current_user
 from app.storage_utils import subir_imagen
-from app.config import ACCESS_TOKEN_EXPIRE_MINUTES, ADMIN_USER, ADMIN_PASS
+from app.config import ACCESS_TOKEN_EXPIRE_MINUTES, ADMIN_USER, ADMIN_PASS, COOKIE_SECURE
 import os
 
 router = APIRouter(prefix='/admin', tags=['admin'])
@@ -33,7 +33,7 @@ def login(username: str = Form(...), password: str = Form(...)):
         max_age=ACCESS_TOKEN_EXPIRE_MINUTES * 60,
         httponly=True,
         samesite='lax',
-        secure=False,
+        secure=COOKIE_SECURE,
     )
     return resp
 
@@ -102,6 +102,9 @@ def upload_product_image(
     file: UploadFile = File(...),
     _=Depends(login_required),
 ):
+    ALLOWED_TYPES = {'image/jpeg', 'image/png', 'image/webp', 'image/gif'}
+    if file.content_type not in ALLOWED_TYPES:
+        raise HTTPException(status_code=400, detail='Tipo de archivo no permitido. Solo imágenes JPEG, PNG, WebP o GIF.')
     product = get_one('products', {'id': f'eq.{product_id}'})
     if not product:
         raise HTTPException(status_code=404, detail='Product not found')

@@ -264,7 +264,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     /* ============ DRAWER EVENT DELEGATION ============ */
     document.getElementById('cartDrawerBody').addEventListener('click', (e) => {
-        const btn = e.target;
+        const btn = e.target.closest('.cart-item-plus, .cart-item-minus, .cart-item-remove');
+        if (!btn) return;
         if (btn.classList.contains('cart-item-plus')) {
             cambiarCantidad(parseInt(btn.dataset.index), 1);
         } else if (btn.classList.contains('cart-item-minus')) {
@@ -390,6 +391,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function resetCheckout() {
         checkoutForm.style.display = 'flex';
         checkoutForm.reset();
+        checkoutError.style.display = 'none';
         btnEnviarPedido.disabled = false;
         btnEnviarPedido.textContent = 'Enviar pedido por WhatsApp';
     }

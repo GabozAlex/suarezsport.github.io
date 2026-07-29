@@ -13,3 +13,4 @@ SUPABASE_BUCKET = os.getenv('SUPABASE_BUCKET', 'productos')
 
 ADMIN_USER = os.getenv('ADMIN_USER', 'admin')
 ADMIN_PASS = os.getenv('ADMIN_PASS', 'admin123')
+COOKIE_SECURE = os.getenv('COOKIE_SECURE', 'true').lower() == 'true'
