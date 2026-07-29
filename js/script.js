@@ -108,7 +108,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     /* ============ CART ============ */
-    let cart = JSON.parse(localStorage.getItem('suarezCart') || '[]');
+    let cart;
+    try { cart = JSON.parse(localStorage.getItem('suarezCart')) || []; } catch { cart = []; }
 
     function guardarCart() {
         localStorage.setItem('suarezCart', JSON.stringify(cart));
@@ -226,7 +227,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     modalClose.addEventListener('click', cerrarModal);
-    modalOverlay.addEventListener('click', cerrarModal);
+    modalOverlay.addEventListener('click', (e) => { if (e.target === modalOverlay) cerrarModal(); });
 
     btnConfirmar.addEventListener('click', () => {
         if (!productoSeleccionado) return;
@@ -278,12 +279,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const checkoutView = document.getElementById('checkoutView');
     const checkoutResumen = document.getElementById('checkoutResumen');
     const checkoutForm = document.getElementById('checkoutForm');
+    const checkoutError = document.getElementById('checkoutError');
     const cartDrawerBack = document.getElementById('cartDrawerBack');
     const cartDrawerTitle = document.getElementById('cartDrawerTitle');
     const btnEnviarPedido = document.getElementById('btnEnviarPedido');
 
     function mostrarCheckout() {
         if (cart.length === 0) return;
+        checkoutError.style.display = 'none';
         cartView.classList.add('hidden');
         checkoutView.classList.remove('hidden');
         cartDrawerBack.classList.add('visible');
@@ -324,7 +327,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const direccion = document.getElementById('checkoutDireccion').value.trim();
         const notas = document.getElementById('checkoutNotas').value.trim();
 
-        if (!nombre || !telefono || !direccion) return;
+        if (!nombre || !telefono || !direccion) {
+            checkoutError.textContent = 'Completa todos los campos obligatorios.';
+            checkoutError.style.display = 'block';
+            return;
+        }
 
         btnEnviarPedido.disabled = true;
         btnEnviarPedido.textContent = 'Enviando...';
@@ -576,22 +583,30 @@ document.addEventListener('DOMContentLoaded', () => {
             const email = document.getElementById('email')?.value || form.querySelector('[name="email"]')?.value || '';
             const mensaje = document.getElementById('mensaje')?.value || form.querySelector('[name="mensaje"]')?.value || '';
 
-            const apiPromise = fetch(`${API_URL}/api/contact`, {
+            let apiOk = false;
+            let fallbackOk = false;
+
+            const p1 = fetch(`${API_URL}/api/contact`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ name: nombre, email, message: mensaje }),
-            }).catch(() => {});
+            }).then(r => { apiOk = r.ok; }).catch(() => {});
 
-            const fallbackPromise = fetch(form.action, {
+            const p2 = fetch(form.action, {
                 method: 'POST',
                 body: new FormData(form),
                 headers: { 'Accept': 'application/json' },
-            }).catch(() => {});
+            }).then(() => { fallbackOk = true; }).catch(() => {});
 
-            Promise.allSettled([apiPromise, fallbackPromise]).then(() => {
-                feedback.textContent = '¡Mensaje enviado con éxito! Te contactaremos pronto.';
-                feedback.className = 'form-feedback form-feedback--success';
-                form.reset();
+            Promise.allSettled([p1, p2]).then(() => {
+                if (apiOk || fallbackOk) {
+                    feedback.textContent = '¡Mensaje enviado con éxito! Te contactaremos pronto.';
+                    feedback.className = 'form-feedback form-feedback--success';
+                    form.reset();
+                } else {
+                    feedback.textContent = 'Error al enviar. Intenta de nuevo o escríbenos por WhatsApp.';
+                    feedback.className = 'form-feedback form-feedback--error';
+                }
                 submitBtn.disabled = false;
                 submitBtn.textContent = 'Enviar';
             });
