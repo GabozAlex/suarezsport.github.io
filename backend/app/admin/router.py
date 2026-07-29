@@ -84,6 +84,10 @@ def create_product(
     colors: str = Form(''),
     _=Depends(login_required),
 ):
+    if price <= 0:
+        raise HTTPException(status_code=400, detail='El precio debe ser mayor a 0')
+    if not name.strip():
+        raise HTTPException(status_code=400, detail='El nombre es obligatorio')
     insert('products', {
         'name': name,
         'description': description,
@@ -162,6 +166,10 @@ def update_product(
     colors: str = Form(''),
     _=Depends(login_required),
 ):
+    if price <= 0:
+        raise HTTPException(status_code=400, detail='El precio debe ser mayor a 0')
+    if not name.strip():
+        raise HTTPException(status_code=400, detail='El nombre es obligatorio')
     product = get_one('products', {'id': f'eq.{product_id}'})
     if not product:
         raise HTTPException(status_code=404, detail='Product not found')

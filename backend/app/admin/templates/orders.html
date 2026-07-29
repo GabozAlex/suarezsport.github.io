@@ -24,7 +24,7 @@
     <tr>
       <td>#{{ order.id }}</td>
       <td><strong>{{ order.customer_name }}</strong>{% if order.notes %}<br><span style="font-size:0.8rem;color:#888;font-style:italic;">{{ order.notes[:60] }}{% if order.notes|length > 60 %}...{% endif %}</span>{% endif %}</td>
-      <td><a href="https://wa.me/58{{ order.phone|replace(' ','')|replace('-','')|replace('+','') }}" target="_blank" style="color:#25d366;font-weight:600;">{{ order.phone }}</a></td>
+      <td><a href="https://wa.me/58{{ order.phone|replace(' ','')|replace('-','')|replace('+','') }}" target="_blank" rel="noopener noreferrer" style="color:#25d366;font-weight:600;">{{ order.phone }}</a></td>
       <td style="max-width:180px;font-size:0.85rem;">{{ order.address }}</td>
       <td>
         {% set items = order.get('items') or [] %}
@@ -54,7 +54,7 @@
         {% for item in items %}
           <li>
             <span class="item-prod">{{ item.nombre or item.name }}</span>
-            <span class="item-det"> — {{ item.talla or item.size }} / {{ item.color }} x{{ item.cantidad or item.quantity or 1 }}</span>
+            <span class="item-det"> — {{ item.talla or item.size }} / {{ item.color or '' }} x{{ item.cantidad or item.quantity or 1 }}</span>
             <span class="item-precio">${{ item.precio or item.price }}</span>
           </li>
         {% endfor %}
