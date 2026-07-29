@@ -68,14 +68,7 @@ backend/
 └── requirements.txt
 ```
 
-## Admin por defecto
-
-```
-Usuario: admin
-Clave:   admin123
-```
-
-Para crear el admin inicial, visita `https://<api>/admin/api/setup` después del deploy.
+> El admin se crea automáticamente al visitar `/admin/api/setup` después del deploy.
 
 ## Desarrollado por
 
