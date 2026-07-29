@@ -11,7 +11,7 @@
 - Fase 6: SEO completo (OG, Twitter Cards, JSON-LD, sitemap, robots.txt)
 - Fase 7: Backend FastAPI + admin Jinja2 + Supabase REST + Storage
 - Frontend conectado a API real con fallback local
-- Deploy: Backend en Render, Frontend en Vercel
+- Deploy: Backend en Render, Frontend en GitHub Pages
 
 ### 🔲 Pendientes
 
@@ -29,14 +29,13 @@
 - **WhatsApp flotante** — Botón fijo con pulso en la landing
 - **Buscador de productos** — Filtro por nombre en tiempo real
 - **Galería de clientes** — Sección con imágenes de clientes
-- **Script migración** — `backend/scripts/migrar_productos.py`
 
 ---
 
 ## Arquitectura actual
 
 ```
-suarezsport.github.io/     → Frontend (HTML/CSS/JS)          → Vercel
+suarezsport.github.io/     → Frontend (HTML/CSS/JS)          → GitHub Pages
   ├── index.html
   ├── css/index.css
   ├── js/

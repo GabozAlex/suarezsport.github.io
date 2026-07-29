@@ -35,5 +35,6 @@ ANTES DEL DEPLOY EN RENDER
 ===========================
 1. Ve a tu dashboard de Supabase → SQL Editor
 2. Pega el contenido de backend/supabase_schema.sql y ejecútalo
-3. Luego ve a: https://<tu-app>.onrender.com/admin/api/setup
-   (esto crea el admin: usuario admin, contraseña admin123)
+3. Agrega las variables de entorno ADMIN_USER y ADMIN_PASS (opcional, por defecto admin/admin123).
+4. Luego ve a: https://<tu-app>.onrender.com/admin/api/setup
+   (esto crea el admin con las credenciales de las variables de entorno)
