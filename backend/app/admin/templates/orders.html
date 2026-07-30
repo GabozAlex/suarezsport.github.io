@@ -2,19 +2,6 @@
 {% block title %}Pedidos{% endblock %}
 {% block content %}
 <h2>Pedidos</h2>
-<style>
-.order-items { margin:0; padding:0; list-style:none; font-size:0.85rem; }
-.order-items li { padding:4px 0; border-bottom:1px solid #f0f0f0; }
-.order-items li:last-child { border-bottom:none; }
-.order-items .item-prod { font-weight:600; }
-.order-items .item-det { color:#666; font-size:0.8rem; }
-.order-items .item-precio { color:#e65c00; font-weight:600; }
-.order-detail-toggle { background:none; border:1px solid #ddd; border-radius:4px; padding:2px 8px; cursor:pointer; font-size:0.8rem; color:#666; }
-.order-detail-toggle:hover { background:#f0f0f0; }
-.order-detail-row { display:none; }
-.order-detail-row.open { display:table-row; }
-.order-detail-row td { background:#fafafa; padding:12px 16px; }
-</style>
 <table class="admin-table">
   <thead>
     <tr><th>ID</th><th>Cliente</th><th>Teléfono</th><th>Dirección</th><th>Productos</th><th>Total</th><th>Estado</th><th>Fecha</th><th>Acciones</th></tr>

@@ -32,23 +32,23 @@
 {% if product %}
 <hr style="margin:2rem 0">
 <h3>Imágenes del producto</h3>
-<div id="image-list" style="display:flex;flex-wrap:wrap;gap:1rem;margin-bottom:1rem">
+<div id="image-list" class="image-list">
   {% for img in product.images or [] %}
-  <div class="image-item" style="position:relative;width:150px">
-    <img src="{{ img }}" style="width:100%;height:120px;object-fit:cover;border-radius:8px;border:2px solid var(--border)" alt="">
+  <div class="image-item">
+    <img src="{{ img }}" alt="{{ product.name }}">
     <form method="post" action="/admin/products/{{ product.id }}/images/delete" style="position:absolute;top:4px;right:4px" onsubmit="return confirm('¿Eliminar esta imagen?')">
       <input type="hidden" name="image_url" value="{{ img }}">
-      <button type="submit" style="background:#e74c3c;color:#fff;border:none;border-radius:50%;width:24px;height:24px;cursor:pointer;font-size:14px;line-height:1">×</button>
+      <button type="submit" class="image-delete-btn">×</button>
     </form>
   </div>
   {% endfor %}
 </div>
-<div id="image-list-empty" {% if product.images %}style="display:none"{% endif %}>
-  <p style="color:var(--muted)">Sin imágenes aún.</p>
+<div id="image-list-empty" class="image-list-empty" {% if product.images %}style="display:none"{% endif %}>
+  <p>Sin imágenes aún.</p>
 </div>
 
-<form id="upload-form" style="display:flex;gap:1rem;align-items:center;margin-top:0.5rem">
-  <input type="file" id="image-file" accept="image/*" required style="border:1px solid var(--border);padding:0.5rem;border-radius:6px;background:var(--bg)">
+<form id="upload-form" class="upload-form">
+  <input type="file" id="image-file" accept="image/*" required class="file-input">
   <button type="submit" class="btn btn-primary">Subir imagen</button>
 </form>
 <script>
